@@ -1,0 +1,1120 @@
+{
+ "version": "1.0",
+ "composition": {
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration": 108.0,
+  "background": "#FFF1C1"
+ },
+ "layers": [
+  {
+   "id": "wall",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       960,
+       440
+      ],
+      "size": [
+       1920,
+       880
+      ],
+      "roundness": 0
+     },
+     {
+      "type": "fill",
+      "color": "#FFF1C1"
+     }
+    ]
+   }
+  },
+  {
+   "id": "tiles",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       960,
+       980
+      ],
+      "size": [
+       1920,
+       200
+      ],
+      "roundness": 0
+     },
+     {
+      "type": "fill",
+      "color": "#BFE6F7"
+     }
+    ]
+   }
+  },
+  {
+   "id": "tileline",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       960,
+       882
+      ],
+      "size": [
+       1920,
+       8
+      ],
+      "roundness": 0
+     },
+     {
+      "type": "fill",
+      "color": "#8FCDEB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "window",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       330,
+       330
+      ],
+      "size": [
+       380,
+       380
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sky",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       330,
+       330
+      ],
+      "size": [
+       340,
+       340
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#9ED8FF"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sun",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       380,
+       290
+      ],
+      "size": [
+       120,
+       120
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFD23F"
+     }
+    ]
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1,
+        1
+       ]
+      }
+     ],
+     "expression": "return value*(1+0.06*math.sin(2*math.pi*time/3))"
+    }
+   }
+  },
+  {
+   "id": "mirror",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       1560,
+       380
+      ],
+      "size": [
+       330,
+       400
+      ],
+      "roundness": 60
+     },
+     {
+      "type": "fill",
+      "color": "#DFF4FF"
+     }
+    ]
+   }
+  },
+  {
+   "id": "mirrorframe",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       1560,
+       380
+      ],
+      "size": [
+       360,
+       430
+      ],
+      "roundness": 70
+     },
+     {
+      "type": "fill",
+      "color": "#1E8F6A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sinktop",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       1560,
+       700
+      ],
+      "size": [
+       420,
+       60
+      ],
+      "roundness": 30
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF"
+     }
+    ]
+   }
+  },
+  {
+   "id": "sinkbase",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       1560,
+       800
+      ],
+      "size": [
+       300,
+       180
+      ],
+      "roundness": 30
+     },
+     {
+      "type": "fill",
+      "color": "#F4F9FF"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cup",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       1430,
+       630
+      ],
+      "size": [
+       60,
+       90
+      ],
+      "roundness": 14
+     },
+     {
+      "type": "fill",
+      "color": "#FF9FB2"
+     }
+    ]
+   }
+  },
+  {
+   "id": "duck",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       1700,
+       640
+      ],
+      "size": [
+       90,
+       70
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFD23F"
+     }
+    ]
+   }
+  },
+  {
+   "id": "duckhead",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       1730,
+       600
+      ],
+      "size": [
+       50,
+       50
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFD23F"
+     }
+    ]
+   }
+  },
+  {
+   "id": "stool",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "rect",
+      "position": [
+       900,
+       900
+      ],
+      "size": [
+       420,
+       70
+      ],
+      "roundness": 25
+     },
+     {
+      "type": "fill",
+      "color": "#E2A86B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "bubble0",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       78,
+       78
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        637,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+0.62)%4.78; return Vec.v2(637+25*math.sin(t*3), 1100-t/4.78*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble1",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       40,
+       40
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1120,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+0.32)%4.88; return Vec.v2(1120+25*math.sin(t*3), 1100-t/4.88*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble2",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       85,
+       85
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1110,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+0.89)%3.78; return Vec.v2(1110+25*math.sin(t*3), 1100-t/3.78*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble3",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       65,
+       65
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1113,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+2.54)%4.62; return Vec.v2(1113+25*math.sin(t*3), 1100-t/4.62*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble4",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       49,
+       49
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1458,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+1.29)%5.58; return Vec.v2(1458+25*math.sin(t*3), 1100-t/5.58*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble5",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       89,
+       89
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1221,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+0.06)%4.17; return Vec.v2(1221+25*math.sin(t*3), 1100-t/4.17*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble6",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       42,
+       42
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        281,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+3.33)%3.48; return Vec.v2(281+25*math.sin(t*3), 1100-t/3.48*1250)"
+    }
+   }
+  },
+  {
+   "id": "bubble7",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       57,
+       57
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFFAA"
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 17.5,
+   "duration": 90.5,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        766,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+4.40)%5.34; return Vec.v2(766+25*math.sin(t*3), 1100-t/5.34*1250)"
+    }
+   }
+  },
+  {
+   "id": "mokki",
+   "content": {
+    "kind": "image",
+    "asset": {
+     "type": "image",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/5a88349b-de7a-4dd7-8ee9-e2385f0ef217.png",
+     "width": 1128,
+     "height": 1318
+    }
+   },
+   "transform": {
+    "anchor": [
+     564.0,
+     1318
+    ],
+    "position": [
+     900,
+     880
+    ],
+    "scale": [
+     0.5,
+     0.5
+    ]
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.7,
+       "value": [
+        0.5,
+        0.5
+       ]
+      },
+      {
+       "time": 107.0,
+       "value": [
+        0.5,
+        0.5
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 108.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ],
+     "expression": "local base=value; if time<17.50 then return base end; local b=math.abs(math.sin(math.pi*(time-17.50)/0.6)); return Vec.v2(base.x*(1+0.04*(1-b)), base.y*(1-0.04*(1-b)))"
+    },
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        900,
+        880
+       ]
+      }
+     ],
+     "expression": "if time<17.50 then return value+Vec.v2(0,-10*math.sin(2*math.pi*time/1.6)) else local b=math.abs(math.sin(math.pi*(time-17.50)/0.6)); return value+Vec.v2(0,-45*b) end"
+    },
+    "rotation": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": 0
+      }
+     ],
+     "expression": "return 4*math.sin(2*math.pi*time/2.4)"
+    }
+   }
+  },
+  {
+   "id": "toothbrush",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "group",
+      "contents": [
+       {
+        "type": "rect",
+        "position": [
+         0,
+         -70
+        ],
+        "size": [
+         46,
+         60
+        ],
+        "roundness": 10
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "rect",
+        "position": [
+         0,
+         -28
+        ],
+        "size": [
+         70,
+         26
+        ],
+        "roundness": 10
+       },
+       {
+        "type": "fill",
+        "color": "#4A90E2"
+       },
+       {
+        "type": "rect",
+        "position": [
+         0,
+         90
+        ],
+        "size": [
+         38,
+         240
+        ],
+        "roundness": 19
+       },
+       {
+        "type": "fill",
+        "color": "#4A90E2"
+       }
+      ],
+      "position": [
+       0,
+       0
+      ]
+     }
+    ]
+   },
+   "parentId": "mokki",
+   "start": 17.5,
+   "duration": 89.5,
+   "transform": {
+    "position": [
+     900,
+     980
+    ],
+    "scale": [
+     1.6,
+     1.6
+    ],
+    "rotation": -60
+   },
+   "animations": {
+    "rotation": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": -60
+      }
+     ],
+     "expression": "return value+15*math.sin(2*math.pi*time/0.3)"
+    },
+    "opacity": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": 0
+      },
+      {
+       "time": 0.3,
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "title1",
+   "start": 0.6,
+   "duration": 4.0,
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush Your Teeth\nwith Mokki!",
+    "font": {
+     "size": 96,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center"
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.5,
+       "value": [
+        1,
+        1
+       ]
+      },
+      {
+       "time": 3.6,
+       "value": [
+        1,
+        1
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 4.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "title2",
+   "start": 17.5,
+   "duration": 4.0,
+   "transform": {
+    "position": [
+     960,
+     130
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center"
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.5,
+       "value": [
+        1,
+        1
+       ]
+      },
+      {
+       "time": 3.6,
+       "value": [
+        1,
+        1
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 4.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "bye",
+   "start": 103.0,
+   "duration": 5.0,
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Bye-bye, friends!\nSee you tomorrow!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center"
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.5,
+       "value": [
+        1,
+        1
+       ]
+      },
+      {
+       "time": 4.6,
+       "value": [
+        1,
+        1
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 5.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "voice",
+   "start": 0.8,
+   "content": {
+    "kind": "audio",
+    "asset": {
+     "type": "audio",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/e79c0ab1-5ab7-4a1d-a2dc-9f504e287b97.mp3"
+    }
+   }
+  },
+  {
+   "id": "song",
+   "start": 17.5,
+   "content": {
+    "kind": "audio",
+    "asset": {
+     "type": "audio",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/f2d69eec-3e2a-493c-8ad1-ef2c3cbc3e81.mp3"
+    }
+   }
+  }
+ ]
+}
