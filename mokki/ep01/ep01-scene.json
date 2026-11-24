@@ -4,7 +4,7 @@
   "width": 1920,
   "height": 1080,
   "fps": 30,
-  "duration": 108.0,
+  "duration": 281.0,
   "background": "#FFF1C1"
  },
  "layers": [
@@ -198,6 +198,16 @@
      }
     ]
    },
+   "transform": {
+    "position": [
+     0,
+     0
+    ],
+    "anchor": [
+     0,
+     0
+    ]
+   },
    "animations": {
     "scale": {
      "keyframes": [
@@ -211,16 +221,6 @@
      ],
      "expression": "return value*(1+0.06*math.sin(2*math.pi*time/3))"
     }
-   },
-   "transform": {
-    "position": [
-     0,
-     0
-    ],
-    "anchor": [
-     0,
-     0
-    ]
    }
   },
   {
@@ -494,7 +494,7 @@
    }
   },
   {
-   "id": "bubble0",
+   "id": "bubble0_0",
    "content": {
     "kind": "shape",
     "items": [
@@ -521,8 +521,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -540,7 +540,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble1",
+   "id": "bubble0_1",
    "content": {
     "kind": "shape",
     "items": [
@@ -567,8 +567,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -586,7 +586,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble2",
+   "id": "bubble0_2",
    "content": {
     "kind": "shape",
     "items": [
@@ -613,8 +613,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -632,7 +632,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble3",
+   "id": "bubble0_3",
    "content": {
     "kind": "shape",
     "items": [
@@ -659,8 +659,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -678,7 +678,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble4",
+   "id": "bubble0_4",
    "content": {
     "kind": "shape",
     "items": [
@@ -705,8 +705,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -724,7 +724,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble5",
+   "id": "bubble0_5",
    "content": {
     "kind": "shape",
     "items": [
@@ -751,8 +751,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -770,7 +770,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble6",
+   "id": "bubble0_6",
    "content": {
     "kind": "shape",
     "items": [
@@ -797,8 +797,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -816,7 +816,7 @@
    "timeMode": "layer"
   },
   {
-   "id": "bubble7",
+   "id": "bubble0_7",
    "content": {
     "kind": "shape",
     "items": [
@@ -843,8 +843,8 @@
      }
     ]
    },
-   "start": 17.5,
-   "duration": 90.5,
+   "start": 45.5,
+   "duration": 90.0,
    "animations": {
     "position": {
      "keyframes": [
@@ -860,6 +860,979 @@
     }
    },
    "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_0",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       64,
+       64
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1118,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+4.40)%4.78; return Vec.v2(1118+25*math.sin(t*3), 1100-t/4.78*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_1",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       86,
+       86
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1612,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+2.29)%5.36; return Vec.v2(1612+25*math.sin(t*3), 1100-t/5.36*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_2",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       48,
+       48
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1790,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+4.56)%4.73; return Vec.v2(1790+25*math.sin(t*3), 1100-t/4.73*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_3",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       53,
+       53
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        898,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+0.45)%3.29; return Vec.v2(898+25*math.sin(t*3), 1100-t/3.29*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_4",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       80,
+       80
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        678,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+2.57)%5.90; return Vec.v2(678+25*math.sin(t*3), 1100-t/5.90*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_5",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       76,
+       76
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        766,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+3.55)%4.26; return Vec.v2(766+25*math.sin(t*3), 1100-t/4.26*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_6",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       54,
+       54
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        868,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+1.88)%4.60; return Vec.v2(868+25*math.sin(t*3), 1100-t/4.60*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "bubble1_7",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "ellipse",
+      "position": [
+       0,
+       0
+      ],
+      "size": [
+       57,
+       57
+      ]
+     },
+     {
+      "type": "fill",
+      "color": "#FFFFFF",
+      "opacity": 0.6
+     },
+     {
+      "type": "stroke",
+      "color": "#8FCDEB",
+      "width": 4
+     }
+    ]
+   },
+   "start": 172.5,
+   "duration": 90.0,
+   "animations": {
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        839,
+        1100
+       ]
+      }
+     ],
+     "expression": "local t=(time+4.69)%5.05; return Vec.v2(839+25*math.sin(t*3), 1100-t/5.05*1250)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "candy",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "group",
+      "contents": [
+       {
+        "type": "rect",
+        "position": [
+         0,
+         0
+        ],
+        "size": [
+         120,
+         120
+        ],
+        "roundness": 60
+       },
+       {
+        "type": "fill",
+        "color": "#FF6B9A"
+       },
+       {
+        "type": "polystar",
+        "starType": "polygon",
+        "points": 3,
+        "position": [
+         -95,
+         0
+        ],
+        "outerRadius": 45,
+        "rotation": 90
+       },
+       {
+        "type": "fill",
+        "color": "#FFB3CC"
+       },
+       {
+        "type": "polystar",
+        "starType": "polygon",
+        "points": 3,
+        "position": [
+         95,
+         0
+        ],
+        "outerRadius": 45,
+        "rotation": -90
+       },
+       {
+        "type": "fill",
+        "color": "#FFB3CC"
+       }
+      ]
+     }
+    ]
+   },
+   "start": 19.0,
+   "duration": 18.0,
+   "transform": {
+    "position": [
+     1250,
+     520
+    ]
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 17.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 18.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    "rotation": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": 0
+      }
+     ],
+     "expression": "return 10*math.sin(2*math.pi*time/1.5)"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "sugarbug0",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "group",
+      "contents": [
+       {
+        "type": "ellipse",
+        "position": [
+         -14,
+         -6
+        ],
+        "size": [
+         16,
+         16
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         14,
+         -6
+        ],
+        "size": [
+         16,
+         16
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         -14,
+         -6
+        ],
+        "size": [
+         8,
+         8
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#14224F"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         0,
+         0
+        ],
+        "size": [
+         80,
+         64
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#A98BEB"
+       }
+      ]
+     }
+    ]
+   },
+   "start": 28.0,
+   "duration": 11.5,
+   "transform": {
+    "position": [
+     600,
+     520
+    ]
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 11.25,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 11.5,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        600,
+        520
+       ]
+      }
+     ],
+     "expression": "return value+Vec.v2(18*math.sin(time*5+0), 12*math.cos(time*4+0))"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "sugarbug1",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "group",
+      "contents": [
+       {
+        "type": "ellipse",
+        "position": [
+         -14,
+         -6
+        ],
+        "size": [
+         16,
+         16
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         14,
+         -6
+        ],
+        "size": [
+         16,
+         16
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         -14,
+         -6
+        ],
+        "size": [
+         8,
+         8
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#14224F"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         0,
+         0
+        ],
+        "size": [
+         80,
+         64
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#A98BEB"
+       }
+      ]
+     }
+    ]
+   },
+   "start": 28.4,
+   "duration": 11.1,
+   "transform": {
+    "position": [
+     1180,
+     360
+    ]
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 10.85,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 11.1,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        1180,
+        360
+       ]
+      }
+     ],
+     "expression": "return value+Vec.v2(18*math.sin(time*5+1), 12*math.cos(time*4+1))"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "sugarbug2",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "group",
+      "contents": [
+       {
+        "type": "ellipse",
+        "position": [
+         -14,
+         -6
+        ],
+        "size": [
+         16,
+         16
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         14,
+         -6
+        ],
+        "size": [
+         16,
+         16
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         -14,
+         -6
+        ],
+        "size": [
+         8,
+         8
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#14224F"
+       },
+       {
+        "type": "ellipse",
+        "position": [
+         0,
+         0
+        ],
+        "size": [
+         80,
+         64
+        ]
+       },
+       {
+        "type": "fill",
+        "color": "#A98BEB"
+       }
+      ]
+     }
+    ]
+   },
+   "start": 28.8,
+   "duration": 10.7,
+   "transform": {
+    "position": [
+     640,
+     300
+    ]
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 10.45,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 10.7,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    "position": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        640,
+        300
+       ]
+      }
+     ],
+     "expression": "return value+Vec.v2(18*math.sin(time*5+2), 12*math.cos(time*4+2))"
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "storytitle",
+   "start": 30.0,
+   "duration": 7,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     130
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Oh no! Sugar bugs!",
+    "font": {
+     "size": 90,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 6.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 7,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
   },
   {
    "id": "mokki",
@@ -913,7 +1886,7 @@
        ]
       },
       {
-       "time": 107.0,
+       "time": 280.0,
        "value": [
         0.5,
         0.5
@@ -921,14 +1894,14 @@
        "easing": "ease_in"
       },
       {
-       "time": 108.0,
+       "time": 281.0,
        "value": [
         0,
         0
        ]
       }
      ],
-     "expression": "local base=value; if time<17.50 then return base end; local b=math.abs(math.sin(math.pi*(time-17.50)/0.6)); return Vec.v2(base.x*(1+0.04*(1-b)), base.y*(1-0.04*(1-b)))"
+     "expression": "local s=0; if time>=45.50 and time<135.50 then s=45.50 end; if time>=172.50 and time<262.50 then s=172.50 end; if (time>=45.50 and time<135.50) or (time>=172.50 and time<262.50) then local b=math.abs(math.sin(math.pi*(time-s)/0.6)); return Vec.v2(value.x*(1+0.04*(1-b)), value.y*(1-0.04*(1-b))) else return value end"
     },
     "position": {
      "keyframes": [
@@ -940,7 +1913,7 @@
        ]
       }
      ],
-     "expression": "if time<17.50 then return value+Vec.v2(0,-10*math.sin(2*math.pi*time/1.6)) else local b=math.abs(math.sin(math.pi*(time-17.50)/0.6)); return value+Vec.v2(0,-45*b) end"
+     "expression": "local s=0; if time>=45.50 and time<135.50 then s=45.50 end; if time>=172.50 and time<262.50 then s=172.50 end; if (time>=45.50 and time<135.50) or (time>=172.50 and time<262.50) then local b=math.abs(math.sin(math.pi*(time-s)/0.6)); return value+Vec.v2(0,-45*b) else return value+Vec.v2(0,-10*math.sin(2*math.pi*time/1.6)) end"
     },
     "rotation": {
      "keyframes": [
@@ -954,7 +1927,7 @@
    }
   },
   {
-   "id": "toothbrush",
+   "id": "toothbrush0",
    "content": {
     "kind": "shape",
     "items": [
@@ -1018,8 +1991,111 @@
     ]
    },
    "parentId": "mokki",
-   "start": 17.5,
-   "duration": 89.5,
+   "start": 45.5,
+   "duration": 90.0,
+   "transform": {
+    "position": [
+     1150,
+     980
+    ],
+    "scale": [
+     1.6,
+     1.6
+    ],
+    "rotation": -60
+   },
+   "animations": {
+    "rotation": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": -60
+      }
+     ],
+     "expression": "return value+15*math.sin(2*math.pi*time/0.3)"
+    },
+    "opacity": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": 0
+      },
+      {
+       "time": 0.3,
+       "value": 1
+      }
+     ]
+    }
+   },
+   "timeMode": "layer"
+  },
+  {
+   "id": "toothbrush1",
+   "content": {
+    "kind": "shape",
+    "items": [
+     {
+      "type": "group",
+      "contents": [
+       {
+        "type": "rect",
+        "position": [
+         0,
+         -70
+        ],
+        "size": [
+         46,
+         60
+        ],
+        "roundness": 10
+       },
+       {
+        "type": "fill",
+        "color": "#FFFFFF"
+       },
+       {
+        "type": "rect",
+        "position": [
+         0,
+         -28
+        ],
+        "size": [
+         70,
+         26
+        ],
+        "roundness": 10
+       },
+       {
+        "type": "fill",
+        "color": "#4A90E2"
+       },
+       {
+        "type": "rect",
+        "position": [
+         0,
+         90
+        ],
+        "size": [
+         38,
+         240
+        ],
+        "roundness": 19
+       },
+       {
+        "type": "fill",
+        "color": "#4A90E2"
+       }
+      ],
+      "position": [
+       0,
+       0
+      ]
+     }
+    ]
+   },
+   "parentId": "mokki",
+   "start": 172.5,
+   "duration": 90.0,
    "transform": {
     "position": [
      1150,
@@ -1059,89 +2135,28 @@
   {
    "id": "title1",
    "start": 0.6,
-   "duration": 4.0,
+   "duration": 5.0,
+   "timeMode": "layer",
    "transform": {
     "position": [
      960,
-     140
+     150
     ]
    },
    "content": {
     "kind": "text",
     "text": "Brush Your Teeth\nwith Mokki!",
     "font": {
-     "size": 96,
+     "size": 100,
      "weight": 800
     },
     "color": "#14224F",
-    "alignment": "center"
-   },
-   "animations": {
-    "scale": {
-     "keyframes": [
-      {
-       "time": 0,
-       "value": [
-        0,
-        0
-       ],
-       "easing": {
-        "kind": "cubic_bezier",
-        "control": [
-         0.34,
-         1.56,
-         0.64,
-         1
-        ]
-       }
-      },
-      {
-       "time": 0.5,
-       "value": [
-        1,
-        1
-       ]
-      },
-      {
-       "time": 3.6,
-       "value": [
-        1,
-        1
-       ],
-       "easing": "ease_in"
-      },
-      {
-       "time": 4.0,
-       "value": [
-        0,
-        0
-       ]
-      }
-     ]
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
     }
    },
-   "timeMode": "layer"
-  },
-  {
-   "id": "title2",
-   "start": 17.5,
-   "duration": 4.0,
-   "transform": {
-    "position": [
-     960,
-     130
-    ]
-   },
-   "content": {
-    "kind": "text",
-    "text": "Brush, brush, brush your teeth!",
-    "font": {
-     "size": 84,
-     "weight": 800
-    },
-    "color": "#14224F",
-    "alignment": "center"
-   },
    "animations": {
     "scale": {
      "keyframes": [
@@ -1162,83 +2177,17 @@
        }
       },
       {
-       "time": 0.5,
+       "time": 0.4,
        "value": [
-        1,
-        1
+        1.0,
+        1.0
        ]
       },
       {
-       "time": 3.6,
+       "time": 4.75,
        "value": [
-        1,
-        1
-       ],
-       "easing": "ease_in"
-      },
-      {
-       "time": 4.0,
-       "value": [
-        0,
-        0
-       ]
-      }
-     ]
-    }
-   },
-   "timeMode": "layer"
-  },
-  {
-   "id": "bye",
-   "start": 103.0,
-   "duration": 5.0,
-   "transform": {
-    "position": [
-     960,
-     140
-    ]
-   },
-   "content": {
-    "kind": "text",
-    "text": "Bye-bye, friends!\nSee you tomorrow!",
-    "font": {
-     "size": 84,
-     "weight": 800
-    },
-    "color": "#14224F",
-    "alignment": "center"
-   },
-   "animations": {
-    "scale": {
-     "keyframes": [
-      {
-       "time": 0,
-       "value": [
-        0,
-        0
-       ],
-       "easing": {
-        "kind": "cubic_bezier",
-        "control": [
-         0.34,
-         1.56,
-         0.64,
-         1
-        ]
-       }
-      },
-      {
-       "time": 0.5,
-       "value": [
-        1,
-        1
-       ]
-      },
-      {
-       "time": 4.6,
-       "value": [
-        1,
-        1
+        1.0,
+        1.0
        ],
        "easing": "ease_in"
       },
@@ -1251,11 +2200,1558 @@
       }
      ]
     }
-   },
-   "timeMode": "layer"
+   }
   },
   {
-   "id": "voice",
+   "id": "song1title",
+   "start": 46.0,
+   "duration": 6.5,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     130
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Let's sing!",
+    "font": {
+     "size": 96,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 6.25,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 6.5,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "song2title",
+   "start": 173.0,
+   "duration": 6.5,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     130
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Now YOU sing with Mokki!",
+    "font": {
+     "size": 90,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 6.25,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 6.5,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "lyric0_0",
+   "start": 54.7,
+   "duration": 2.700000000000001,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Wake up, wake up, the sun says hi!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_1",
+   "start": 57.45,
+   "duration": 2.3000000000000007,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Mokki stretches to the sky!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_2",
+   "start": 59.8,
+   "duration": 2.349999999999998,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Grab your brush and toothpaste too,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_3",
+   "start": 62.2,
+   "duration": 2.3500000000000014,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Tiny pea, just like I do!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_4",
+   "start": 64.6,
+   "duration": 2.349999999999998,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_5",
+   "start": 67.0,
+   "duration": 2.3999999999999986,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Top and bottom, up and down!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_6",
+   "start": 69.45,
+   "duration": 2.3500000000000014,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_7",
+   "start": 71.85,
+   "duration": 3.4499999999999993,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Round and round and round and round!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_8",
+   "start": 93.4,
+   "duration": 2.3999999999999986,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Little circles, front and back,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_9",
+   "start": 95.85,
+   "duration": 2.299999999999997,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Bye-bye, bye-bye, sugar snack!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_10",
+   "start": 98.2,
+   "duration": 2.3499999999999943,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Count with Mokki: one, two, three,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_11",
+   "start": 100.6,
+   "duration": 3.1000000000000014,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Shiny teeth for you and me!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_12",
+   "start": 112.6,
+   "duration": 2.3500000000000085,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_13",
+   "start": 115.0,
+   "duration": 2.4000000000000057,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Top and bottom, up and down!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_14",
+   "start": 117.45,
+   "duration": 2.3499999999999943,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_15",
+   "start": 119.85,
+   "duration": 3.450000000000003,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Round and round and round and round!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_16",
+   "start": 126.9,
+   "duration": 2.5,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Swish and spit, and smile so bright,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_17",
+   "start": 129.45,
+   "duration": 2.3499999999999943,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Morning teeth and teeth at night!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric0_18",
+   "start": 131.85,
+   "duration": 3.25,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Ding! Sparkle!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_0",
+   "start": 181.7,
+   "duration": 2.700000000000001,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Wake up, wake up, the sun says hi!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_1",
+   "start": 184.45,
+   "duration": 2.3000000000000007,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Mokki stretches to the sky!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_2",
+   "start": 186.8,
+   "duration": 2.349999999999998,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Grab your brush and toothpaste too,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_3",
+   "start": 189.2,
+   "duration": 2.3500000000000014,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Tiny pea, just like I do!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_4",
+   "start": 191.6,
+   "duration": 2.349999999999998,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_5",
+   "start": 194.0,
+   "duration": 2.3999999999999986,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Top and bottom, up and down!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_6",
+   "start": 196.45,
+   "duration": 2.3500000000000014,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_7",
+   "start": 198.85,
+   "duration": 3.4499999999999993,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Round and round and round and round!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_8",
+   "start": 220.4,
+   "duration": 2.3999999999999986,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Little circles, front and back,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_9",
+   "start": 222.85,
+   "duration": 2.299999999999997,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Bye-bye, bye-bye, sugar snack!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_10",
+   "start": 225.2,
+   "duration": 2.3499999999999943,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Count with Mokki: one, two, three,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_11",
+   "start": 227.6,
+   "duration": 3.1000000000000014,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Shiny teeth for you and me!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_12",
+   "start": 239.6,
+   "duration": 2.3500000000000085,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_13",
+   "start": 242.0,
+   "duration": 2.4000000000000057,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Top and bottom, up and down!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_14",
+   "start": 244.45,
+   "duration": 2.3499999999999943,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Brush, brush, brush your teeth,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_15",
+   "start": 246.85,
+   "duration": 3.450000000000003,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Round and round and round and round!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_16",
+   "start": 253.9,
+   "duration": 2.5,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Swish and spit, and smile so bright,",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_17",
+   "start": 256.45,
+   "duration": 2.3499999999999943,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Morning teeth and teeth at night!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "lyric1_18",
+   "start": 258.85,
+   "duration": 3.25,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     140
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Ding! Sparkle!",
+    "font": {
+     "size": 78,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   }
+  },
+  {
+   "id": "card0",
+   "start": 141.0,
+   "duration": 6.0,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     170
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "1. A tiny bit of toothpaste,\nas small as a pea!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 5.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 6.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "card1",
+   "start": 147.0,
+   "duration": 5.0,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     170
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "2. Brush up and down!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 4.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 5.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "card2",
+   "start": 152.0,
+   "duration": 5.0,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     170
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "3. Little circles, round and round!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 4.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 5.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "card3",
+   "start": 157.0,
+   "duration": 9.0,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     170
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "4. Brush 2 times a day:\nmorning and night!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 8.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 9.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "card4",
+   "start": 166.0,
+   "duration": 5.100000000000001,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     170
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Get your toothbrush!",
+    "font": {
+     "size": 84,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 4.850000000000001,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 5.100000000000001,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "bye",
+   "start": 271.0,
+   "duration": 10.0,
+   "timeMode": "layer",
+   "transform": {
+    "position": [
+     960,
+     150
+    ]
+   },
+   "content": {
+    "kind": "text",
+    "text": "Bye-bye, friends!\nSee you tomorrow!",
+    "font": {
+     "size": 90,
+     "weight": 800
+    },
+    "color": "#14224F",
+    "alignment": "center",
+    "stroke": {
+     "width": 14,
+     "color": "#FFFFFF"
+    }
+   },
+   "animations": {
+    "scale": {
+     "keyframes": [
+      {
+       "time": 0,
+       "value": [
+        0,
+        0
+       ],
+       "easing": {
+        "kind": "cubic_bezier",
+        "control": [
+         0.34,
+         1.56,
+         0.64,
+         1
+        ]
+       }
+      },
+      {
+       "time": 0.4,
+       "value": [
+        1.0,
+        1.0
+       ]
+      },
+      {
+       "time": 9.75,
+       "value": [
+        1.0,
+        1.0
+       ],
+       "easing": "ease_in"
+      },
+      {
+       "time": 10.0,
+       "value": [
+        0,
+        0
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "v_intro",
    "start": 0.8,
    "content": {
     "kind": "audio",
@@ -1266,13 +3762,57 @@
    }
   },
   {
-   "id": "song",
-   "start": 17.5,
+   "id": "v_story",
+   "start": 18.5,
+   "content": {
+    "kind": "audio",
+    "asset": {
+     "type": "audio",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/0759fc9a-f8c3-404d-ac9f-f4d5ce8e0057.mp3"
+    }
+   }
+  },
+  {
+   "id": "song1",
+   "start": 45.5,
    "content": {
     "kind": "audio",
     "asset": {
      "type": "audio",
      "uri": "https://gcdn.picsart.com/picsart-mcp/f2d69eec-3e2a-493c-8ad1-ef2c3cbc3e81.mp3"
+    }
+   }
+  },
+  {
+   "id": "v_lesson",
+   "start": 136.5,
+   "content": {
+    "kind": "audio",
+    "asset": {
+     "type": "audio",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/273d020b-8f6a-454b-b66f-91a80aebe288.mp3"
+    }
+   }
+  },
+  {
+   "id": "song2",
+   "start": 172.5,
+   "content": {
+    "kind": "audio",
+    "asset": {
+     "type": "audio",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/f2d69eec-3e2a-493c-8ad1-ef2c3cbc3e81.mp3"
+    }
+   }
+  },
+  {
+   "id": "v_bye",
+   "start": 263.5,
+   "content": {
+    "kind": "audio",
+    "asset": {
+     "type": "audio",
+     "uri": "https://gcdn.picsart.com/picsart-mcp/489a0ae2-f87e-4d71-9c57-deb54f235954.mp3"
     }
    }
   }
