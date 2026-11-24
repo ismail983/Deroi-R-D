@@ -74,3 +74,23 @@ brush your teeth song, toothbrush song, brushing teeth for kids, brush your teet
 
 ## Short (≤ 60 s, vertical), title
 Brush with Mokki! 🪥 #shorts #kidssongs #nurseryrhymes #toddlers
+
+---
+
+# Short – "Brush with Mokki!" (vertical, 35 s)
+File: Mokki-Short-Ep01-Brush-With-Mokki.mp4 (built by `mokki/shorts/build_short_ep01.py`)
+
+**Title**
+Brush Your Teeth with Mokki! 🪥✨ #shorts #kidssongs #nurseryrhymes
+
+**Description**
+Brush, brush, brush your teeth! 🪥 Sing along with Mokki: a tiny bit of toothpaste, up and down, round and round! ✨
+Watch the full song on our channel 💚
+#shorts #BrushYourTeeth #KidsSongs #NurseryRhymes #Toddlers #MokkiAndFriends
+
+**Tags**
+brush your teeth, toothbrush song, kids songs, nursery rhymes, toddler songs, shorts, mokki and friends
+
+**Settings**: Made for kids ✅ · Altered/synthetic content: Yes · Category: Education ·
+Related video: link the full "Brush Your Teeth Song" (if YouTube offers it for this video) ·
+Post it 1–2 hours after the full video, or the next day.
