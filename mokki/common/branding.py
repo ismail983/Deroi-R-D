@@ -10,6 +10,13 @@ OUTRO_MUSIC = "https://gcdn.picsart.com/picsart-mcp/c8d8c768-6ea7-4cd7-a2a3-8066
 OUTRO_VOICE = "https://gcdn.picsart.com/picsart-mcp/2c73ed91-3bc4-487c-aa1d-388eafe0f862.mp3"    # 9.8 s, Mokki
 
 INTRO_LEN, OUTRO_LEN = 6.0, 14.0
+import kit
+
+
+def ktext(id_, t, pos, size, start, dur, color=CORAL, stroke=WHITE, pop=True, wobble=False):
+    """Kid font text; button labels (no outline) appear without the letter pop."""
+    return kit.kid_text(id_, t, pos, int(size * 1.08), start, dur, color=color, stroke=stroke, letters=stroke is not None,
+                        pop=pop, wobble=wobble, shadow=stroke is not None)
 
 OUTRO_WORDS = [(0.08, 0.24, "Did"), (0.32, 0.4, "you"), (0.52, 0.64, "like"), (0.72, 1.08, "it"), (1.28, 2.0, "Yay"),
                (2.16, 2.68, "[giggles]"), (2.72, 2.96, "Ask"), (3.0, 3.04, "a"), (3.12, 3.44, "grown-up"), (3.52, 3.6, "to"),
@@ -32,8 +39,8 @@ def intro_layers():
                    scale=0.55, rot_expr="return value+8*math.sin(2*math.pi*time/1.0)")
     L.append(shape_layer("in_bigcloud", cloud_icon(720, WHITE), 0, INTRO_LEN, (380, 900), {"scale": pop_scale(INTRO_LEN + 1)}))
     # title + subtitle
-    L.append(text("in_title", "Mokki & Friends", (1270, 430), 150, 0.9, INTRO_LEN - 0.9, wobble=True))
-    L.append(text("in_sub", "Songs and stories for little ones", (1270, 590), 58, 1.7, INTRO_LEN - 1.7, color=GREEN))
+    L.extend(ktext("in_title", "Mokki & Friends", (1270, 430), 150, 0.9, INTRO_LEN - 0.9, color="#14224F", wobble=True))
+    L.extend(ktext("in_sub", "Songs and stories for little ones", (1270, 590), 58, 1.7, INTRO_LEN - 1.7, color=GREEN))
     random.seed(7)
     for i, (x, y) in enumerate([(760, 300), (1800, 300), (760, 640), (1800, 680), (1270, 230), (1270, 740)]):
         L.append(prop(f"in_spark{i}", sparkle_icon(34 + 6 * (i % 3)), (x, y), 1.0 + i * 0.15, INTRO_LEN - 1.0 - i * 0.15, spin=120))
@@ -56,7 +63,7 @@ def outro_layers():
                    scale=0.6, rot_expr=wave,
                    scale_keys=[{"time": 0, "value": [0.6, 0.6]}, {"time": OUTRO_LEN - 0.6, "value": [0.6, 0.6], "easing": "ease_in"},
                                {"time": OUTRO_LEN, "value": [0, 0]}])
-    L.append(text("out_yay", "Did you like it?", (1300, 170), 96, VO, w["Ask"] - 0.1, color=CORAL))
+    L.extend(ktext("out_yay", "Did you like it?", (1300, 170), 96, VO, w["Ask"] - 0.1, color=CORAL))
     for i, (x, y) in enumerate([(240, 330), (780, 300), (220, 760), (800, 760)]):
         L.append(prop(f"out_sp{i}", sparkle_icon(40), (x, y), VO + w["Yay"] + i * 0.1, 2.0, spin=150))
 
@@ -75,8 +82,8 @@ def outro_layers():
     L.append(shape_layer("out_like_thumb_w", thumb_icon(WHITE), like_t + 0.15, OUTRO_LEN - like_t - 0.15, (lx - 150, ly),
                          {"scale": {"keyframes": [{"time": 0, "value": [1.5, 1.5], "easing": POP}, {"time": 0.4, "value": [1, 1]}]},
                           "rotation": {"keyframes": [{"time": 0, "value": -20, "easing": POP}, {"time": 0.4, "value": 0}]}}))
-    L.append(text("out_like_txt", "LIKE", (lx + 60, ly + 25), 76, like_in + 0.2, like_t + 0.15 - like_in - 0.2, stroke=None, pop=False))
-    L.append(text("out_liked_txt", "LIKE", (lx + 60, ly + 25), 76, like_t + 0.15, OUTRO_LEN - like_t - 0.15, color=WHITE, stroke=None, pop=False))
+    L.extend(ktext("out_like_txt", "LIKE", (lx + 60, ly + 25), 76, like_in + 0.2, like_t + 0.15 - like_in - 0.2, stroke=None, pop=False))
+    L.extend(ktext("out_liked_txt", "LIKE", (lx + 60, ly + 25), 76, like_t + 0.15, OUTRO_LEN - like_t - 0.15, color=WHITE, stroke=None, pop=False))
     for i, (dx, dy) in enumerate([(-200, -90), (-60, -120), (120, -100), (230, -40)]):
         L.append(prop(f"out_like_h{i}", heart_icon(26), (lx + dx, ly + dy), like_t + 0.2 + i * 0.08, 1.5,
                       extra={"position": {"keyframes": [{"time": 0, "value": [lx + dx, ly + dy]},
@@ -92,8 +99,8 @@ def outro_layers():
         {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.35, "value": [1, 1]},
                                  {"time": sub_t + 0.15 - sub_in, "value": [1, 1]}, {"time": sub_t + 0.25 - sub_in, "value": [0.9, 0.9], "easing": POP},
                                  {"time": sub_t + 0.55 - sub_in, "value": [1, 1]}]}}))
-    L.append(text("out_sub_txt", "SUBSCRIBE", (sx, sy + 22), 66, sub_in + 0.2, sub_t + 0.25 - sub_in - 0.2, color=WHITE, stroke=None, pop=False))
-    L.append(text("out_subd_txt", "SUBSCRIBED", (sx, sy + 22), 60, sub_t + 0.25, OUTRO_LEN - sub_t - 0.25, color="#606060", stroke=None, pop=False))
+    L.extend(ktext("out_sub_txt", "SUBSCRIBE", (sx, sy + 22), 66, sub_in + 0.2, sub_t + 0.25 - sub_in - 0.2, color=WHITE, stroke=None, pop=False))
+    L.extend(ktext("out_subd_txt", "SUBSCRIBED", (sx, sy + 22), 60, sub_t + 0.25, OUTRO_LEN - sub_t - 0.25, color="#606060", stroke=None, pop=False))
     L.append(shape_layer("out_bell", bell_icon(NAVY), sub_t + 0.45, OUTRO_LEN - sub_t - 0.45, (sx + 360, sy),
                          {"scale": pop_scale(OUTRO_LEN - sub_t - 0.45, 1.0),
                           "rotation": {"keyframes": [{"time": 0, "value": 0}],
@@ -114,8 +121,8 @@ def outro_layers():
                               {"time": like_t + 0.15 - f0, "value": [0.85, 0.85]}, {"time": like_t + 0.3 - f0, "value": [1, 1]},
                               {"time": sub_t + 0.15 - f0, "value": [1, 1]}, {"time": sub_t + 0.25 - f0, "value": [0.85, 0.85]},
                               {"time": sub_t + 0.4 - f0, "value": [1, 1]}]}}))
-    L.append(text("out_ask", "Ask a grown-up!", (1300, 170), 84, VO + w["Ask"], bye_t - VO - w["Ask"] - 0.1, color=GREEN))
-    L.append(text("out_bye", "Bye-bye, friends!\nSee you next time!", (1300, 170), 84, bye_t - 0.1, OUTRO_LEN - bye_t + 0.1, color=CORAL))
+    L.extend(ktext("out_ask", "Ask a grown-up!", (1300, 170), 84, VO + w["Ask"], bye_t - VO - w["Ask"] - 0.1, color=GREEN))
+    L.extend(ktext("out_bye", "Bye-bye, friends!\nSee you next time!", (1300, 170), 84, bye_t - 0.1, OUTRO_LEN - bye_t + 0.1, color=CORAL))
     L.append(audio("out_music", 0, OUTRO_MUSIC))
     L.append(audio("out_voice", VO, OUTRO_VOICE))
     return L
