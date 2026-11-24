@@ -229,7 +229,7 @@ KID_FONT = "https://pastatic.picsart.com/27849958378051772310.ttf"   # Fredoka O
 POP_LETTERS = {"preset": "fade_in_chars", "params": {"duration": 0.5, "stagger": 0.6, "grow": 1, "overshoot": 0.7}}
 
 
-def kid_text(id_, t, pos, size, start, dur, color=CORAL, stroke=WHITE, letters=True, pop=True, wobble=False, shadow=False):
+def kid_text(id_, t, pos, size, start, dur, color=CORAL, stroke=WHITE, letters=True, pop=True, wobble=False, shadow=False, wrap=None):
     """Big round Fredoka One text, thick white outline, soft shadow, letters popping in."""
     out = []
     def content(col, strk):
@@ -237,6 +237,8 @@ def kid_text(id_, t, pos, size, start, dur, color=CORAL, stroke=WHITE, letters=T
              "lineHeight": round(size * 1.15)}  # pixels between baselines
         if strk:
             c["stroke"] = {"width": max(10, size // 6), "color": strk}
+        if wrap:
+            c["wrapWidth"] = wrap
         if letters:
             c["animations"] = [POP_LETTERS]
         return c
