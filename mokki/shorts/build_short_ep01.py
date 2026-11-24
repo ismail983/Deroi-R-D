@@ -3,7 +3,7 @@ import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "common"))
 sys.path.insert(0, os.path.join(HERE, "..", "ep01"))
-import kit, text_check
+import kit, text_check, shorts_kit as sk
 from kit import (NAVY, WHITE, YELLOW, CORAL, GREEN, PINK, YT_RED, POP, rect, ell, group, shape_layer, prop, audio, snap,
                  sparkle_icon, bell_icon, mokki_rig, pop_scale)
 from word_timings import INTRO, SONG_WORDS
@@ -12,7 +12,10 @@ SONG = "https://gcdn.picsart.com/picsart-mcp/f2d69eec-3e2a-493c-8ad1-ef2c3cbc3e8
 V_INTRO = "https://gcdn.picsart.com/picsart-mcp/e79c0ab1-5ab7-4a1d-a2dc-9f504e287b97.mp3"
 W, H = 1080, 1920
 
-HOOK = 2.45                                  # "Hi friends! It's me, Mokki!"
+ABSTRACT = "https://gcdn.picsart.com/picsart-mcp/f147a4b8-0c07-4139-8482-2d2cf2c77fdf.mp3"   # "Today in Mokki World, we learn to brush our teeth! Let's go!" 4.4 s
+ABS_WORDS = [(0.08, 0.4), (0.48, 0.64), (0.68, 1.04), (1.12, 1.52), (1.68, 1.84), (1.92, 2.08), (2.16, 2.24), (2.36, 2.48), (2.56, 2.64), (2.72, 3.28), (3.44, 3.68), (3.76, 4.4)]
+T_ABS = sk.STING_LEN + 0.1
+HOOK = T_ABS + 4.5
 A0, A1 = 9.0, 30.0                           # song: verse 1 + chorus
 B0, B1 = 81.2, 89.8                          # song: swish & spit ... Ding! Sparkle!
 TA = HOOK                                    # short time where segment A starts
@@ -31,12 +34,15 @@ def song_t(s):
 
 
 L = []
+# ---- channel sting (2.5 s)
+sk.sting(L, 0)
 # ---- background (vertical bathroom)
-L.append(shape_layer("bg_wall", rect([540, 800], [1080, 1600], "#FFF1C1"), 0, END, absolute=True))
-L.append(shape_layer("bg_tiles", rect([540, 1760], [1080, 340], "#BFE6F7") + rect([540, 1592], [1080, 10], "#8FCDEB"), 0, END, absolute=True))
-L.append(shape_layer("bg_window", ell([170, 200], [220, 220], "#9ED8FF") + ell([170, 200], [250, 250], WHITE), 0, END, absolute=True))
-L.append(shape_layer("bg_sun", ell([0, 0], [80, 80], YELLOW), 0, END, (195, 180)))
-L.append(shape_layer("bg_mirror", rect([900, 230], [200, 250], "#DFF4FF", 40) + rect([900, 230], [230, 280], GREEN, 50), 0, END, absolute=True))
+B = sk.STING_LEN
+L.append(shape_layer("bg_wall", rect([540, 800], [1080, 1600], "#FFF1C1"), B, END - B, absolute=True))
+L.append(shape_layer("bg_tiles", rect([540, 1760], [1080, 340], "#BFE6F7") + rect([540, 1592], [1080, 10], "#8FCDEB"), B, END - B, absolute=True))
+L.append(shape_layer("bg_window", ell([170, 200], [220, 220], "#9ED8FF") + ell([170, 200], [250, 250], WHITE), B, END - B, absolute=True))
+L.append(shape_layer("bg_sun", ell([0, 0], [80, 80], YELLOW), B, END - B, (195, 180)))
+L.append(shape_layer("bg_mirror", rect([900, 230], [200, 250], "#DFF4FF", 40) + rect([900, 230], [230, 280], GREEN, 50), B, END - B, absolute=True))
 
 # ---- floating bubbles
 for i, (x, p, off) in enumerate([(120, 4.2, 0.3), (330, 5.1, 2.0), (760, 4.6, 1.1), (960, 5.6, 3.2), (560, 3.9, 2.6)]):
@@ -48,7 +54,10 @@ for i, (x, p, off) in enumerate([(120, 4.2, 0.3), (330, 5.1, 2.0), (760, 4.6, 1.
                                           "expression": f"local t=(time+{off})%{p}; return Vec.v2({x}+25*math.sin(t*3), 2000-t/{p}*2100)"}}})
 
 # ---- hook text
-L += kit.kid_text("hook", "Brush with Mokki!", (540, 440), 110, 0.1, HOOK + 1.2, color=CORAL, wrap=950, wobble=True)
+L += kit.kid_text("hook", "Today:\nBrush our teeth!", (540, 470), 110, T_ABS, HOOK - T_ABS + 1.0, color=CORAL, wrap=950, wobble=True)
+L.append(prop("hook_brush", kit.brush_h_icon(), (560, 900), T_ABS + 2.2, HOOK - T_ABS - 2.0, s=1.8, wiggle=10))
+for i, (x, y) in enumerate([(250, 760), (850, 760), (300, 1040), (800, 1040)]):
+    L.append(prop(f"hook_sp{i}", sparkle_icon(40, YELLOW), (x, y), T_ABS + 2.4 + i * 0.1, HOOK - T_ABS - 2.3, spin=160))
 
 # ---- lyrics (only the lines that are in the cut)
 LYRICS = [(9.2, 11.9, "Wake up, wake up, the sun says hi!"), (11.95, 14.25, "Mokki stretches to the sky!"),
@@ -77,14 +86,14 @@ for i, (x, y) in enumerate([(250, 650), (830, 640), (200, 1050), (880, 1060), (5
     L.append(prop(f"ding{i}", sparkle_icon(60, YELLOW), (x, y), song_t(86.4) + i * 0.1, TEND - song_t(86.4) - i * 0.1, spin=200))
 
 # ---- Mokki (bottom), lip-synced to the hook line and the song
-words = [(s, e, 0) for s, e, w in INTRO if s < HOOK and not w.startswith("[")]
+words = [(T_ABS + s, T_ABS + e, 0) for s, e in ABS_WORDS]
 for s, e in SONG_WORDS:
     t = song_t(s)
     if t is not None:
         words.append((t, t + (e - s), 0))
 songs_cond = f"(time>={TA:.2f} and time<{TEND:.2f})"
 bounce = f"if {songs_cond} then local b=math.abs(math.sin(math.pi*(time-{TA:.2f})/0.6)); return value+Vec.v2(0,-40*b) end; return value"
-L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2400], "easing": POP}, {"time": 0.5, "value": [540, 1760]}], scale=0.5, box=(W, H),
+L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2400], "easing": "step"}, {"time": B, "value": [540, 2400], "easing": POP}, {"time": B + 0.5, "value": [540, 1760]}], scale=0.5, box=(W, H),
                pos_expr=bounce,
                scale_keys=[{"time": 0, "value": [0.5, 0.5]}, {"time": TEND, "value": [0.5, 0.5], "easing": "ease_in_out"},
                            {"time": TEND + 0.5, "value": [0.42, 0.42]}])
@@ -106,8 +115,7 @@ L.append(shape_layer("bell", bell_icon(NAVY), TEND + 0.6, END - TEND - 0.6, (900
                       "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": "return 25*math.sin(time*20)*math.max(0,1-time/2)"}}))
 
 # ---- audio: hook line + two cuts of the song
-L.append({"id": "a_hook", "start": 0, "duration": HOOK,
-          "content": {"kind": "audio", "asset": {"type": "audio", "uri": V_INTRO}, "trim": {"in": 0, "out": HOOK}}})
+L.append({"id": "a_abstract", "start": snap(T_ABS), "content": {"kind": "audio", "asset": {"type": "audio", "uri": ABSTRACT}}})
 L.append({"id": "a_songA", "start": snap(TA), "duration": snap(A1 - A0),
           "content": {"kind": "audio", "asset": {"type": "audio", "uri": SONG}, "trim": {"in": A0, "out": A1}}})
 L.append({"id": "a_songB", "start": snap(TB), "duration": snap(B1 - B0),
