@@ -113,18 +113,18 @@ L.append(shape("candy", [
       {"type": "fill", "color": "#FFB3CC"},
       {"type": "polystar", "starType": "polygon", "points": 3, "position": [95, 0], "outerRadius": 45, "rotation": -90},
       {"type": "fill", "color": "#FFB3CC"}]}],
-    start=CANDY_IN, duration=CANDY_OUT - CANDY_IN, transform={"position": [1250, 520]},
-    animations={"scale": pop_scale(CANDY_OUT - CANDY_IN),
+    start=CANDY_IN, duration=CANDY_OUT - CANDY_IN, transform={"position": [480, 560], "scale": [1.3, 1.3]},
+    animations={"scale": pop_scale(CANDY_OUT - CANDY_IN, 1.3),
                 "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": "return 10*math.sin(2*math.pi*time/1.5)"}}))
 BUGS_IN, BUGS_OUT = T_STORY + 9.5, T_STORY + 21.0
-for i, (x, y) in enumerate([(600, 520), (1180, 360), (640, 300)]):
+for i, (x, y) in enumerate([(470, 330), (1260, 330), (650, 560)]):
     L.append(shape(f"sugarbug{i}", [
         {"type": "group", "contents":
             ell([-14, -6], [16, 16], "#FFFFFF") + ell([14, -6], [16, 16], "#FFFFFF") +
             ell([-14, -6], [8, 8], NAVY)[:1] + [{"type": "fill", "color": NAVY}] +
             ell([0, 0], [80, 64], "#A98BEB")}],
-        start=BUGS_IN + i * 0.4, duration=BUGS_OUT - BUGS_IN - i * 0.4, transform={"position": [x, y]},
-        animations={"scale": pop_scale(BUGS_OUT - BUGS_IN - i * 0.4),
+        start=BUGS_IN + i * 0.4, duration=BUGS_OUT - BUGS_IN - i * 0.4, transform={"position": [x, y], "scale": [1.8, 1.8]},
+        animations={"scale": pop_scale(BUGS_OUT - BUGS_IN - i * 0.4, 1.8),
                     "position": {"keyframes": [{"time": 0, "value": [x, y]}],
                                  "expression": f"return value+Vec.v2(18*math.sin(time*5+{i}), 12*math.cos(time*4+{i}))"}}))
 L.append(text("storytitle", "Oh no! Sugar bugs!", [960, 130], 90, BUGS_IN + 2, 7))
