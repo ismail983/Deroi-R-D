@@ -234,7 +234,7 @@ def kid_text(id_, t, pos, size, start, dur, color=CORAL, stroke=WHITE, letters=T
     out = []
     def content(col, strk):
         c = {"kind": "text", "text": t, "font": {"family": KID_FONT, "size": size}, "color": col, "alignment": "center",
-             "lineHeight": 1.18}
+             "lineHeight": round(size * 1.15)}  # pixels between baselines
         if strk:
             c["stroke"] = {"width": max(10, size // 6), "color": strk}
         if letters:

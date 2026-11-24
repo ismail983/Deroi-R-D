@@ -9,7 +9,7 @@ def boxes(layers, t_off=0.0, comp=""):
             out += boxes(c["layers"], t_off + l.get("start", 0), l["id"])
         elif c.get("kind") == "text" and not l["id"].endswith("_sh"):
             size = c["font"]["size"]; lines = c["text"].split("\n")
-            lh = c.get("lineHeight", 1.2)
+            lh = c.get("lineHeight", size * 1.2) / size
             w = max(len(x) for x in lines) * size * 0.56
             h = size * (1 + (len(lines) - 1) * lh)
             x, y = l["transform"]["position"]
