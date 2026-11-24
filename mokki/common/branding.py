@@ -16,7 +16,7 @@ import kit
 def ktext(id_, t, pos, size, start, dur, color=CORAL, stroke=WHITE, pop=True, wobble=False):
     """Kid font text; button labels (no outline) appear without the letter pop."""
     return kit.kid_text(id_, t, pos, int(size * 1.08), start, dur, color=color, stroke=stroke, letters=stroke is not None,
-                        pop=pop, wobble=wobble, shadow=stroke is not None)
+                        pop=pop, wobble=wobble, shadow=False)
 
 OUTRO_WORDS = [(0.08, 0.24, "Did"), (0.32, 0.4, "you"), (0.52, 0.64, "like"), (0.72, 1.08, "it"), (1.28, 2.0, "Yay"),
                (2.16, 2.68, "[giggles]"), (2.72, 2.96, "Ask"), (3.0, 3.04, "a"), (3.12, 3.44, "grown-up"), (3.52, 3.6, "to"),

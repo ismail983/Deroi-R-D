@@ -97,7 +97,7 @@ def text(id_, t, pos, size, start, dur, color=None, stroke=WHITE, pop=True, wobb
     if color is None:
         color = KID_COLORS[sum(map(ord, id_)) % len(KID_COLORS)]
     L.extend(kit.kid_text(id_, t, pos, int(size * 1.1), start, dur, color=color, stroke=stroke, pop=pop,
-                          wobble=wobble, shadow=stroke is not None))
+                          wobble=wobble, shadow=False))
 
 
 # ---------------------------------------------------------------- icon library (centered on 0,0)
@@ -385,7 +385,7 @@ n1, n2, n3, n4 = (o + wt(LESSON, "Number", k) for k in (1, 2, 3, 4))
 nturn = o + wt(LESSON, "Now")
 steps = [(n1, n2, "1"), (n2, n3, "2"), (n3, n4, "3"), (n4, nturn, "4")]
 for s, e, n in steps:
-    text(f"le_num{n}", n, (760, 240), 150, s, e - s - 0.1, color=YELLOW, stroke=None)
+    text(f"le_num{n}", n, (735, 470), 150, s, e - s - 0.1, color=YELLOW, stroke=None)
 # 1-3: big animated demos on the board
 L.extend(kit.toothpaste_demo("le_tp_", n1 + 0.3, n2 - n1 - 0.4, center=(1250, 470), sc=0.85, card=False))
 L.extend(kit.mouth_demo("le_ud_", n2 + 0.3, n3 - n2 - 0.4, "updown", center=(1270, 480), sc=0.85, card=False))
@@ -571,5 +571,7 @@ for l in L:
             l[k] = round(round(l[k] * 30) / 30, 4)
 ids = [l["id"] for l in L]
 assert len(ids) == len(set(ids)), [i for i in ids if ids.count(i) > 1]
+import text_check
+text_check.resolve(scene["layers"])
 json.dump(scene, open("ep01-scene.json", "w"), separators=(",", ":"))
 print("layers", len(L), "bytes", len(json.dumps(scene)), "duration", END)
