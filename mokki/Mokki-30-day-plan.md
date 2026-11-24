@@ -1,8 +1,8 @@
 # Mokki & Friends – 30-Day Upload Plan
 
 **Format for every video**
-- Length: 2–3 min (one song plus a short story around it). One Short (≤60 s) cut from the chorus.
-- Structure: Mokki's hello (10 s) → small problem in Mokki World (20 s) → song (90 s) → Mokki shows what he learned (20 s) → goodbye + "see you tomorrow!" (10 s)
+- Length: 3–5 min. One Short (≤60 s) cut from the chorus.
+- Structure: Mokki's hello (~17 s) → small problem in Mokki World (~26 s) → song with on-screen lyrics (90 s) → Mokki's lesson in numbered steps (~35 s) → sing-along: the song again, "Now YOU sing!" (90 s) → goodbye + "see you tomorrow!" (~18 s)
 - Title format: `<Topic> Song <emoji> | Mokki & Friends | Nursery Rhymes & Kids Songs`
 - Audience: Made for Kids ✅
 
