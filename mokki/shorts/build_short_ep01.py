@@ -93,7 +93,7 @@ for s, e in SONG_WORDS:
         words.append((t, t + (e - s), 0))
 songs_cond = f"(time>={TA:.2f} and time<{TEND:.2f})"
 bounce = f"if {songs_cond} then local b=math.abs(math.sin(math.pi*(time-{TA:.2f})/0.6)); return value+Vec.v2(0,-40*b) end; return value"
-L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2400], "easing": "step"}, {"time": B, "value": [540, 2400], "easing": POP}, {"time": B + 0.5, "value": [540, 1760]}], scale=0.5, box=(W, H),
+L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2800], "easing": "step"}, {"time": B, "value": [540, 2400], "easing": POP}, {"time": B + 0.5, "value": [540, 1760]}], scale=0.5, box=(W, H),
                pos_expr=bounce,
                scale_keys=[{"time": 0, "value": [0.5, 0.5]}, {"time": TEND, "value": [0.5, 0.5], "easing": "ease_in_out"},
                            {"time": TEND + 0.5, "value": [0.42, 0.42]}])

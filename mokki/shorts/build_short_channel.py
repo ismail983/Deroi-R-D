@@ -93,7 +93,7 @@ words = words_from_transcript(WORDS, VO)
 wave = f"local r=value+5*math.sin(2*math.pi*time/2.2); if time>{w('See'):.2f} or time<{w('Welcome'):.2f} then r=r+10*math.sin(time*10) end; return r"
 L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2500], "easing": POP}, {"time": 0.9, "value": [540, 1780]}], scale=0.5,
                box=(sk.W, sk.H), rot_expr=wave)
-L.append(shape_layer("bigcloud", kit.cloud_icon(900, WHITE), 0, END, (540, 1820)))
+L.append(shape_layer("bigcloud", kit.cloud_icon(900, WHITE), 0, END, (540, 1960)))
 
 # audio: voice + soft music bed under it
 L.append({"id": "voice", "start": VO, "content": {"kind": "audio", "asset": {"type": "audio", "uri": VOICE}}})
