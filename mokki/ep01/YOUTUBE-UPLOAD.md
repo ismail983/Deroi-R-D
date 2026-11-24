@@ -1,6 +1,6 @@
 # Episode 1 – YouTube Studio upload sheet
 
-## Title (90 / 100 characters)
+## Title (84 / 100 characters)
 Brush Your Teeth Song 🪥 | Mokki & Friends | Nursery Rhymes & Kids Songs for Toddlers
 
 ## Description
@@ -49,7 +49,7 @@ Ding! Sparkle!
 
 #BrushYourTeeth #NurseryRhymes #KidsSongs #ToddlerLearning #MokkiAndFriends
 
-## Tags (paste into the Tags box, ~480 characters)
+## Tags (paste into the Tags box, 376 / 500 characters)
 brush your teeth song, toothbrush song, brushing teeth for kids, brush your teeth, kids songs, nursery rhymes, toddler songs, baby songs, preschool songs, healthy habits for kids, morning routine for kids, bedtime routine, learning videos for toddlers, songs for kids, cartoon for kids, sugar bugs, dental hygiene for kids, children songs, sing along, mokki and friends, mokki
 
 ## Settings in YouTube Studio
