@@ -5,6 +5,8 @@
 - Structure: Mokki's hello (~17 s) → small problem in Mokki World (~26 s) → song with on-screen lyrics (90 s) → Mokki's lesson in numbered steps (~35 s) → sing-along: the song again, "Now YOU sing!" (90 s) → goodbye + "see you tomorrow!" (~18 s)
 - Title format: `<Topic> Song <emoji> | Mokki & Friends | Nursery Rhymes & Kids Songs`
 - Audience: Made for Kids ✅
+- Every video = **channel intro (6 s)** + episode + **outro with Like & Subscribe (14 s)**, built by `common/branding.py` (`wrap_episode`). Keep the episode itself ≤ 4:40 so the whole video stays within 3–5 min.
+- Note: YouTube turns off end screens and cards on Made for Kids videos, so the Like/Subscribe ask lives inside the video (the outro).
 
 **Cast** (ElevenLabs voices)
 | Character | Who | Voice |
