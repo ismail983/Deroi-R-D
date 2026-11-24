@@ -312,8 +312,8 @@ def toothpaste_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
     L = []
     if card:
         L.append(card_layer(p + "card", t0, dur, center, (1180 * sc, 680 * sc)))
-    bsc = 2.4 * sc
-    bpos = (cx - 230 * sc, cy + 200 * sc)
+    bsc = 1.9 * sc
+    bpos = (cx - 40 * sc, cy + 190 * sc)
     blob = (bpos[0] + 90 * bsc, bpos[1] - 62 * bsc - 40 * sc)
     L.append(shape_layer(p + "brush", brush_h_icon(), t0 + 0.15, dur - 0.15, bpos, {"scale": pop_scale(dur - 0.15, bsc)}))
     # tube: nozzle points down-left at the blob, squeezes twice
