@@ -220,7 +220,7 @@ def set_bedroom(start, end, night=False):
     wall = "#2B3A6B" if night else "#E9E4FF"
     bg("bed_wall%d" % night, rect([960, 440], [1920, 880], wall), start, end)
     bg("bed_floor%d" % night, rect([960, 980], [1920, 200], "#7A5C46" if night else "#E8C49A"), start, end)
-    bg("bed_window%d" % night, rect([1500, 330], [420, 360], WHITE, 40) + rect([1500, 330], [380, 320], "#1B2550" if night else "#9ED8FF", 30),
+    bg("bed_window%d" % night, rect([1500, 330], [380, 320], "#1B2550" if night else "#9ED8FF", 30) + rect([1500, 330], [420, 360], WHITE, 40),
        start, end)
     if night:
         L.append({"id": "night_moon", "start": start, "duration": end - start, "timeMode": "layer", "transform": {"position": [1560, 290]},
