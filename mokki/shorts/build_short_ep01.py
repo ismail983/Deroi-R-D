@@ -64,9 +64,8 @@ for i, (s, e, line) in enumerate(LYRICS):
 
 # ---- demos in the upper middle, Mokki below
 C = (540, 860)
-L.append(prop("sun", kit.group(kit.ell([0, 0], [150, 150], YELLOW)) and
-              [{"type": "polystar", "starType": "star", "points": 12, "position": [0, 0], "outerRadius": 120, "innerRadius": 85},
-               {"type": "fill", "color": "#FFB23F"}], (540, 860), song_t(9.2), 2.7, wiggle=12))
+L.append(prop("sun", [{"type": "polystar", "starType": "star", "points": 12, "position": [0, 0], "outerRadius": 120, "innerRadius": 85},
+                     {"type": "fill", "color": "#FFB23F"}], (540, 860), song_t(9.2), 2.7, wiggle=12))
 L.append(shape_layer("sunface", ell([0, 0], [160, 160], YELLOW), song_t(9.2), 2.7, (540, 860), {"scale": pop_scale(2.7)}))
 L += kit.toothpaste_demo("tp_", song_t(14.3), 4.75, center=C, sc=0.8)
 L += kit.mouth_demo("ud_", song_t(19.1), 7.2, "updown", center=C, sc=0.8)
@@ -85,12 +84,12 @@ for s, e in SONG_WORDS:
         words.append((t, t + (e - s), 0))
 songs_cond = f"(time>={TA:.2f} and time<{TEND:.2f})"
 bounce = f"if {songs_cond} then local b=math.abs(math.sin(math.pi*(time-{TA:.2f})/0.6)); return value+Vec.v2(0,-40*b) end; return value"
-L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2300], "easing": POP}, {"time": 0.5, "value": [540, 1700]}], scale=0.62,
+L += mokki_rig("mokki", words, [{"time": 0, "value": [540, 2400], "easing": POP}, {"time": 0.5, "value": [540, 1760]}], scale=0.5, box=(W, H),
                pos_expr=bounce,
-               scale_keys=[{"time": 0, "value": [0.62, 0.62]}, {"time": TEND, "value": [0.62, 0.62], "easing": "ease_in_out"},
-                           {"time": TEND + 0.5, "value": [0.45, 0.45]}])
+               scale_keys=[{"time": 0, "value": [0.5, 0.5]}, {"time": TEND, "value": [0.5, 0.5], "easing": "ease_in_out"},
+                           {"time": TEND + 0.5, "value": [0.42, 0.42]}])
 L.append({"id": "hbrush", "parentId": "mokki", "start": TA, "duration": snap(TEND - TA), "timeMode": "layer",
-          "transform": {"position": [1150, 800], "scale": [1.3, 1.3], "rotation": -60},
+          "transform": {"position": kit.hand_pos((W, H)), "scale": [1.3 * kit.box_map((W, H))[0] / kit.S, 1.3 * kit.box_map((W, H))[0] / kit.S], "rotation": -60},
           "content": {"kind": "shape", "items": [group(rect([0, -70], [46, 60], WHITE, 10) + rect([0, -28], [70, 26], "#4A90E2", 10) +
                                                        rect([0, 90], [38, 240], "#4A90E2", 19))]},
           "animations": {"rotation": {"keyframes": [{"time": 0, "value": -60}], "expression": "return value+15*math.sin(2*math.pi*time/0.3)"}}})

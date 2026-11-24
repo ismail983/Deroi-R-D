@@ -160,8 +160,28 @@ def words_from_transcript(words, offset):
     return out
 
 
-def mokki_rig(id_, words, pos_keys, scale=0.5, closed=(), pos_expr=None, rot_expr=None, scale_expr=None, scale_keys=None):
-    """Mokki picture + lip-synced mouth + blinking eyelids. Children are parented to the picture."""
+def box_map(box=(1920, 1080)):
+    """The picture is fitted ("contain") into a layer box the size of the composition.
+    Returns (scale, map image px -> layer px, anchor at bottom-centre of the picture)."""
+    bw, bh = box
+    sc = min(bw / MW, bh / MH)
+    ox, oy = (bw - MW * sc) / 2, (bh - MH * sc) / 2
+    mp = lambda px, py: [round(ox + px * sc, 2), round(oy + py * sc, 2)]
+    return sc, mp, [round(ox + MW * sc / 2, 2), round(oy + MH * sc, 2)]
+
+
+def hand_pos(box=(1920, 1080)):
+    """Where Mokki 'holds' a prop (just right of his mouth), in his layer-local pixels."""
+    sc, mp, _ = box_map(box)
+    x, y = mp(586, 945)
+    return [round(x + 172 * sc / S, 1), round(y + 26 * sc / S, 1)]
+
+
+def mokki_rig(id_, words, pos_keys, scale=0.5, closed=(), pos_expr=None, rot_expr=None, scale_expr=None, scale_keys=None,
+              box=(1920, 1080)):
+    """Mokki picture + lip-synced mouth + blinking eyelids. Children are parented to the picture.
+    `box` is the composition size the rig lives in."""
+    S, m, anchor = box_map(box)
     L = []
     anim = {"position": {"keyframes": pos_keys}}
     if pos_expr:
@@ -172,7 +192,7 @@ def mokki_rig(id_, words, pos_keys, scale=0.5, closed=(), pos_expr=None, rot_exp
     if scale_expr:
         anim["scale"]["expression"] = scale_expr
     L.append({"id": id_, "content": {"kind": "media", "asset": {"type": "image", "uri": MOKKI_URL, "width": MW, "height": MH}},
-              "transform": {"anchor": [960, 1080], "position": pos_keys[0]["value"], "scale": [scale, scale]}, "animations": anim})
+              "transform": {"anchor": anchor, "position": pos_keys[0]["value"], "scale": [scale, scale]}, "animations": anim})
     mouth_o = ("local W=" + mouth_table(words) + "; local o=0; "
                "for i=1,#W,3 do local s=W[i]; if s>time then break end; local e=W[i+1]; "
                "if time<e then local k=W[i+2]; "
