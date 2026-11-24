@@ -28,14 +28,14 @@ def intro_layers():
                              {"position": {"keyframes": [{"time": 0, "value": [x, y]}],
                                            "expression": f"return value+Vec.v2({sp}*time,0)"}}))
     # Mokki pops up from behind the big cloud, waving
-    L += mokki_rig("in_mokki", [], [{"time": 0, "value": [520, 1250], "easing": POP}, {"time": 0.8, "value": [520, 860]}],
+    L += mokki_rig("in_mokki", [], [{"time": 0, "value": [380, 1250], "easing": POP}, {"time": 0.8, "value": [380, 860]}],
                    scale=0.55, rot_expr="return value+8*math.sin(2*math.pi*time/1.0)")
-    L.append(shape_layer("in_bigcloud", cloud_icon(760, WHITE), 0, INTRO_LEN, (520, 900), {"scale": pop_scale(INTRO_LEN + 1)}))
+    L.append(shape_layer("in_bigcloud", cloud_icon(720, WHITE), 0, INTRO_LEN, (380, 900), {"scale": pop_scale(INTRO_LEN + 1)}))
     # title + subtitle
-    L.append(text("in_title", "Mokki & Friends", (1240, 430), 170, 0.9, INTRO_LEN - 0.9, wobble=True))
-    L.append(text("in_sub", "Songs and stories for little ones", (1240, 600), 62, 1.7, INTRO_LEN - 1.7, color=GREEN))
+    L.append(text("in_title", "Mokki & Friends", (1270, 430), 150, 0.9, INTRO_LEN - 0.9, wobble=True))
+    L.append(text("in_sub", "Songs and stories for little ones", (1270, 590), 58, 1.7, INTRO_LEN - 1.7, color=GREEN))
     random.seed(7)
-    for i, (x, y) in enumerate([(700, 300), (1800, 330), (820, 600), (1760, 640), (1240, 230), (1240, 760)]):
+    for i, (x, y) in enumerate([(760, 300), (1800, 300), (760, 640), (1800, 680), (1270, 230), (1270, 740)]):
         L.append(prop(f"in_spark{i}", sparkle_icon(34 + 6 * (i % 3)), (x, y), 1.0 + i * 0.15, INTRO_LEN - 1.0 - i * 0.15, spin=120))
     L.append(audio("in_jingle", 0, INTRO_JINGLE))
     return L
