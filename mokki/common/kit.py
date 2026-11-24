@@ -312,27 +312,27 @@ def toothpaste_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
     L = []
     if card:
         L.append(card_layer(p + "card", t0, dur, center, (1180 * sc, 680 * sc)))
-    bsc = 1.7 * sc
-    bpos = (cx - 120 * sc, cy + 120 * sc)
-    blob = (bpos[0] + 90 * bsc, bpos[1] - 62 * bsc - 30 * sc)
+    bsc = 2.4 * sc
+    bpos = (cx - 230 * sc, cy + 200 * sc)
+    blob = (bpos[0] + 90 * bsc, bpos[1] - 62 * bsc - 40 * sc)
     L.append(shape_layer(p + "brush", brush_h_icon(), t0 + 0.15, dur - 0.15, bpos, {"scale": pop_scale(dur - 0.15, bsc)}))
     # tube: nozzle points down-left at the blob, squeezes twice
     d = (0.7071, -0.7071)
-    tdist = (115 + 40) * 1.0 * sc
+    tdist = (115 + 50) * 1.3 * sc
     tpos = (blob[0] + d[0] * tdist, blob[1] + d[1] * tdist)
     t_sq = 1.0
     L.append(shape_layer(p + "tube", tube_icon(), t0 + 0.35, 2.6, tpos,
                          {"rotation": {"keyframes": [{"time": 0, "value": -135}]},
-                          "scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.35, "value": [sc, sc]},
-                                                  {"time": t_sq - 0.35, "value": [sc, sc], "easing": "ease_in_out"},
-                                                  {"time": t_sq, "value": [sc * 0.8, sc * 1.1], "easing": "ease_in_out"},
-                                                  {"time": t_sq + 0.3, "value": [sc, sc], "easing": "ease_in_out"},
-                                                  {"time": t_sq + 0.6, "value": [sc * 0.8, sc * 1.1], "easing": "ease_in_out"},
-                                                  {"time": t_sq + 0.9, "value": [sc, sc]},
-                                                  {"time": 2.3, "value": [sc, sc], "easing": "ease_in"}, {"time": 2.6, "value": [0, 0]}]}}))
+                          "scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.35, "value": [1.3 * sc, 1.3 * sc]},
+                                                  {"time": t_sq - 0.35, "value": [1.3 * sc, 1.3 * sc], "easing": "ease_in_out"},
+                                                  {"time": t_sq, "value": [sc * 1.05, sc * 1.4], "easing": "ease_in_out"},
+                                                  {"time": t_sq + 0.3, "value": [1.3 * sc, 1.3 * sc], "easing": "ease_in_out"},
+                                                  {"time": t_sq + 0.6, "value": [sc * 1.05, sc * 1.4], "easing": "ease_in_out"},
+                                                  {"time": t_sq + 0.9, "value": [1.3 * sc, 1.3 * sc]},
+                                                  {"time": 2.3, "value": [1.3 * sc, 1.3 * sc], "easing": "ease_in"}, {"time": 2.6, "value": [0, 0]}]}}))
     # blob grows while the tube squeezes
     gb = t0 + 0.35 + t_sq - 0.1
-    L.append(shape_layer(p + "blob", paste_blob_icon(34), gb, t0 + dur - gb, blob,
+    L.append(shape_layer(p + "blob", paste_blob_icon(46), gb, t0 + dur - gb, blob,
                          {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": "ease_out"}, {"time": 0.9, "value": [sc, sc], "easing": POP},
                                                   {"time": 1.1, "value": [sc * 1.15, sc * 1.15]}, {"time": 1.3, "value": [sc, sc]},
                                                   {"time": t0 + dur - gb - 0.25, "value": [sc, sc], "easing": "ease_in"},
@@ -340,15 +340,15 @@ def toothpaste_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
     # the pea pops in next to it, with "="
     tp = gb + 1.3
     if tp < t0 + dur - 0.6:
-        pea_pos = (blob[0] + 300 * sc, blob[1])
-        L += kid_text(p + "eq", "=", ((blob[0] + pea_pos[0]) / 2, blob[1] + 22 * sc), int(110 * sc), tp, t0 + dur - tp,
+        pea_pos = (blob[0] + 330 * sc, blob[1])
+        L += kid_text(p + "eq", "=", ((blob[0] + pea_pos[0]) / 2, blob[1] + 22 * sc), int(140 * sc), tp, t0 + dur - tp,
                       color=NAVY, letters=False, shadow=False)
-        L.append(shape_layer(p + "pea", pea_icon(34), tp + 0.2, t0 + dur - tp - 0.2, pea_pos,
+        L.append(shape_layer(p + "pea", pea_icon(46), tp + 0.2, t0 + dur - tp - 0.2, pea_pos,
                              {"scale": pop_scale(t0 + dur - tp - 0.2, sc * 1.05),
                               "position": {"keyframes": [{"time": 0, "value": list(pea_pos)}],
                                            "expression": "return value+Vec.v2(0,-12*math.abs(math.sin(time*5)))"}}))
-        for i, (dx, dy) in enumerate([(-60, -60), (60, -70), (0, 60)]):
-            L.append(prop(p + f"spk{i}", sparkle_icon(26 * sc), (blob[0] + dx * sc, blob[1] + dy * sc), tp + 0.3 + i * 0.12,
+        for i, (dx, dy) in enumerate([(-80, -80), (80, -90), (0, 80)]):
+            L.append(prop(p + f"spk{i}", sparkle_icon(34 * sc, YELLOW), (blob[0] + dx * sc, blob[1] + dy * sc), tp + 0.3 + i * 0.12,
                           t0 + dur - tp - 0.3 - i * 0.12, spin=150))
     return L
 
@@ -370,38 +370,39 @@ def mouth_demo(p, t0, dur, mode="updown", center=(1190, 560), sc=1.0, card=True,
     L = []
     if card:
         L.append(card_layer(p + "card", t0, dur, center, (1180 * sc, 680 * sc), border=PINK))
-    L.append(shape_layer(p + "mouth", mouth_icon(), t0 + 0.1, dur - 0.1, (cx, cy + 10 * sc), {"scale": pop_scale(dur - 0.1, sc)}))
+    ms = 1.3 * sc
+    L.append(shape_layer(p + "mouth", mouth_icon(), t0 + 0.1, dur - 0.1, (cx, cy + 10 * sc), {"scale": pop_scale(dur - 0.1, ms)}))
     # sparkles appear tooth by tooth as they get clean
     k = 0
     for row, y in ((0, -78), (1, 78)):
         for i, x in enumerate(range(-225, 226, 180)):
             st = t0 + 0.8 + k * 0.35
             if st < t0 + dur - 0.5:
-                L.append(prop(p + f"sh{k}", sparkle_icon(24 * sc), (cx + (x + 20) * sc, cy + (y - 20) * sc), st, t0 + dur - st, spin=160))
+                L.append(prop(p + f"sh{k}", sparkle_icon(30 * ms, YELLOW), (cx + (x + 20) * ms, cy + 10 * sc + (y - 20) * ms), st, t0 + dur - st, spin=160))
             k += 1
     if mode == "updown":
-        motion = f"return value+Vec.v2({190 * sc:.0f}*math.sin(2*math.pi*time/3.2), {70 * sc:.0f}*math.sin(2*math.pi*time*2.0))"
+        motion = f"return value+Vec.v2({230 * ms:.0f}*math.sin(2*math.pi*time/3.2), {75 * ms:.0f}*math.sin(2*math.pi*time*2.0))"
         if arrows:
             for nm, rot, dy in (("up", 0, -1), ("dn", 180, 1)):
                 L.append(prop(p + nm, [group([{"type": "polystar", "starType": "polygon", "points": 3, "position": [0, -55], "outerRadius": 48},
                                               {"type": "rect", "position": [0, 20], "size": [36, 100], "roundness": 10},
                                               {"type": "fill", "color": CORAL}, {"type": "stroke", "color": WHITE, "width": 6}], rot=rot)],
-                              (cx - 470 * sc, cy + dy * 140 * sc), t0 + 0.4, dur - 0.4, s=sc, bob=dy * 20))
+                              (cx - 500 * sc, cy + dy * 150 * sc), t0 + 0.4, dur - 0.4, s=sc, bob=dy * 20))
     else:
-        motion = (f"return value+Vec.v2({170 * sc:.0f}*math.sin(2*math.pi*time/4.5)+{55 * sc:.0f}*math.cos(time*8), "
-                  f"{55 * sc:.0f}*math.sin(time*8))")
+        motion = (f"return value+Vec.v2({200 * ms:.0f}*math.sin(2*math.pi*time/4.5)+{60 * ms:.0f}*math.cos(time*8), "
+                  f"{60 * ms:.0f}*math.sin(time*8))")
         if arrows:
             L.append(shape_layer(p + "circ", [group([{"type": "polystar", "starType": "polygon", "points": 3, "position": [70, 8],
                                                       "outerRadius": 30, "rotation": 180}, {"type": "fill", "color": CORAL}]),
                                               group([{"type": "ellipse", "position": [0, 0], "size": [140, 140]},
                                                      {"type": "trim", "start": 0, "end": 0.8},
                                                      {"type": "stroke", "color": CORAL, "width": 22, "lineCap": "round"}])],
-                                 t0 + 0.4, dur - 0.4, (cx - 470 * sc, cy),
+                                 t0 + 0.4, dur - 0.4, (cx - 500 * sc, cy),
                                  {"scale": pop_scale(dur - 0.4, sc), "rotation": {"keyframes": [{"time": 0, "value": 0}],
                                                                                   "expression": "return value+360*time"}}))
     # brush over the teeth (bristles towards the teeth)
     L.append(shape_layer(p + "brush", brush_h_icon(), t0 + 0.4, dur - 0.4, (cx - 60 * sc, cy + 60 * sc),
-                         {"scale": pop_scale(dur - 0.4, 1.15 * sc),
+                         {"scale": pop_scale(dur - 0.4, 1.35 * sc),
                           "rotation": {"keyframes": [{"time": 0, "value": -12}]},
                           "position": {"keyframes": [{"time": 0, "value": [cx - 60 * sc, cy + 60 * sc]}], "expression": motion}}))
     return L

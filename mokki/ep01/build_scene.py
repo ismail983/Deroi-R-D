@@ -3,7 +3,9 @@
 v2: lip-synced mouth, blinking eyes, four sets (bedroom day, bathroom, lesson board, bedroom night)
 and props timed to the spoken words and lyrics.
 """
-import json, random
+import json, random, os, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "common"))
+import kit
 from word_timings import INTRO, STORY, LESSON, BYE, SONG_WORDS, word_time as wt
 
 MOKKI = "https://gcdn.picsart.com/picsart-mcp/b11868fb-b61c-4d7f-81cf-7a532ef53e52.png"   # mouthless cutout
@@ -87,16 +89,15 @@ def prop(id_, items, pos, start, dur, s=1.0, wiggle=0.0, bob=0.0, spin=0.0, extr
     L.append(d)
 
 
-def text(id_, t, pos, size, start, dur, color=NAVY, stroke=WHITE, pop=True, wobble=False):
-    c = {"kind": "text", "text": t, "font": {"size": size, "weight": 800}, "color": color, "alignment": "center"}
-    if stroke:
-        c["stroke"] = {"width": 14, "color": stroke}
-    d = {"id": id_, "start": start, "duration": dur, "timeMode": "layer", "transform": {"position": list(pos)}, "content": c}
-    if pop:
-        d["animations"] = {"scale": pop_scale(dur)}
-    if wobble:
-        d["animations"]["rotation"] = {"keyframes": [{"time": 0, "value": 0}], "expression": "return 4*math.sin(2*math.pi*time/0.8)"}
-    L.append(d)
+KID_COLORS = ["#F0506E", "#2BB673", "#4A90E2", "#FF8A00", "#9B59D0"]
+
+
+def text(id_, t, pos, size, start, dur, color=None, stroke=WHITE, pop=True, wobble=False):
+    """Kid-friendly text: Fredoka One, bright colour, thick white outline, letters popping in."""
+    if color is None:
+        color = KID_COLORS[sum(map(ord, id_)) % len(KID_COLORS)]
+    L.extend(kit.kid_text(id_, t, pos, int(size * 1.1), start, dur, color=color, stroke=stroke, pop=pop,
+                          wobble=wobble, shadow=stroke is not None))
 
 
 # ---------------------------------------------------------------- icon library (centered on 0,0)
@@ -341,15 +342,10 @@ def song_props(si, a):
     for li, (s, e, line) in enumerate(LYRICS):
         text(f"{p}ly{li}", line, (960, 130), 80, a + s, e - s, pop=False)
     prop(p + "sun", sun_icon(80), (330, 330), a + 9.2, 2.8, wiggle=12)
-    prop(p + "paste", toothpaste_icon(), (1250, 560), a + 14.3, 2.4, s=0.8, wiggle=8)
-    prop(p + "pea", [group(ell([0, -40], [40, 40], "#E8FBFF") + [{"type": "stroke", "color": "#4A90E2", "width": 5}]),
-                     group(toothbrush_icon(False), pos=(80, 0), rot=90, scale=[0.9, 0.9]),
-                     group(ell([0, 0], [260, 260], WHITE) + [{"type": "stroke", "color": "#8FCDEB", "width": 8}])], (1220, 480), a + 16.7, 2.4)
-    for c0, c1 in [(21.5, 23.9), (69.5, 71.9)]:
-        prop(f"{p}up{c0}", arrow_icon(0), (1240, 430), a + c0, c1 - c0, bob=25)
-        prop(f"{p}dn{c0}", arrow_icon(180), (1240, 700), a + c0, c1 - c0, bob=-25)
-    for c0, c1 in [(26.35, 29.8), (47.9, 50.3), (74.35, 77.8)]:
-        prop(f"{p}circ{c0}", circle_arrow_icon(), (1240, 560), a + c0, c1 - c0, spin=300)
+    L.extend(kit.toothpaste_demo(p + "tp_", a + 14.3, 4.75))
+    for c0, c1, mode in [(19.1, 26.3, "updown"), (26.35, 29.8, "circles"), (47.9, 50.3, "circles"),
+                         (67.1, 74.3, "updown"), (74.35, 77.8, "circles")]:
+        L.extend(kit.mouth_demo(f"{p}m{int(c0)}_", a + c0, c1 - c0, mode))
     candy_t = 50.35
     prop(p + "candy", candy_icon(), (470, 600), a + candy_t, 2.3,
          extra={"position": {"keyframes": [{"time": 0, "value": [470, 600]}, {"time": 1.0, "value": [470, 600], "easing": "ease_in"},
@@ -362,8 +358,7 @@ def song_props(si, a):
         text(f"{p}num{n}", n, (330 + 150 * int(n) - 150, 600), 220, a + t, 57.0 - t, color=[CORAL, "#4A90E2", "#2BB673"][int(n) - 1])
     for i, (x, y) in enumerate([(700, 420), (1150, 380), (650, 760), (1200, 760), (420, 560)]):
         prop(f"{p}sh{i}", sparkle_icon(40), (x, y), a + 55.1 + i * 0.12, 3.0, spin=120)
-    for i, x in enumerate([380, 470, 560]):
-        prop(f"{p}drop{i}", drop_icon(), (x, 520), a + 81.4 + i * 0.25, 2.3, s=1.6, bob=20)
+    L.extend(kit.swish_demo(p + "sw_", a + 81.4, 2.5))
     prop(p + "msun", sun_icon(80), (420, 560), a + 84.0, 1.3)
     prop(p + "mmoon", moon_icon(80, "#FFF1C1"), (420, 560), a + 85.2, 1.2)
     for i, (x, y) in enumerate([(600, 380), (1250, 420), (520, 720), (1300, 700), (960, 300), (380, 480)]):
@@ -384,31 +379,17 @@ for si, (a, b) in enumerate(SONGS):
 o = T_LESSON
 for i, (x, y) in enumerate([(300, 500), (560, 470), (250, 760), (620, 760)]):
     prop(f"le_spark{i}", sparkle_icon(40), (x, y), o + wt(LESSON, "Ding") + i * 0.12, 2.6, spin=150)
-text("le_title", "Mokki's Brushing Secrets", (1230, 200), 72, o + wt(LESSON, "brushing"), 34.7 - wt(LESSON, "brushing") - 0.3,
+text("le_title", "Mokki's Brushing Secrets", (1230, 175), 64, o + wt(LESSON, "brushing"), 34.7 - wt(LESSON, "brushing") - 0.3,
      color=WHITE, stroke=None)
 n1, n2, n3, n4 = (o + wt(LESSON, "Number", k) for k in (1, 2, 3, 4))
 nturn = o + wt(LESSON, "Now")
 steps = [(n1, n2, "1"), (n2, n3, "2"), (n3, n4, "3"), (n4, nturn, "4")]
 for s, e, n in steps:
-    text(f"le_num{n}", n, (790, 330), 160, s, e - s - 0.1, color=YELLOW, stroke=None)
-# 1: toothpaste + pea
-prop("le_paste", toothpaste_icon(), (1080, 470), n1 + 0.4, n2 - n1 - 0.5, s=0.9, wiggle=6)
-pea_t = o + wt(LESSON, "pea")
-prop("le_brushpea", toothbrush_icon(True), (1420, 470), o + wt(LESSON, "tiny"), n2 - o - wt(LESSON, "tiny") - 0.1, s=1.2,
-     extra={"rotation": {"keyframes": [{"time": 0, "value": 90}]}})
-text("le_t1", "as small as a pea!", (1230, 690), 64, o + wt(LESSON, "small"), n2 - o - wt(LESSON, "small") - 0.1, color=WHITE, stroke=None)
-# 2: up and down
-prop("le_up", arrow_icon(0, YELLOW), (1080, 420), n2 + 0.5, n3 - n2 - 0.6, bob=25)
-prop("le_dn", arrow_icon(180, YELLOW), (1080, 650), n2 + 0.5, n3 - n2 - 0.6, bob=-25)
-prop("le_brushud", toothbrush_icon(False), (1380, 520), o + wt(LESSON, "brush"), n3 - o - wt(LESSON, "brush") - 0.1, s=1.1,
-     extra={"position": {"keyframes": [{"time": 0, "value": [1380, 520]}], "expression": "return value+Vec.v2(0,90*math.sin(time*7))"}})
-text("le_t2", "up and down!", (1230, 700), 64, o + wt(LESSON, "up"), n3 - o - wt(LESSON, "up") - 0.1, color=WHITE, stroke=None)
-# 3: circles
-prop("le_circ", circle_arrow_icon(120, YELLOW), (1250, 480), n3 + 0.5, n4 - n3 - 0.6, spin=280)
-prop("le_brushc", toothbrush_icon(False), (1250, 480), o + wt(LESSON, "round"), n4 - o - wt(LESSON, "round") - 0.1, s=0.8,
-     extra={"position": {"keyframes": [{"time": 0, "value": [1250, 480]}],
-                         "expression": "return value+Vec.v2(110*math.cos(time*6),110*math.sin(time*6))"}})
-text("le_t3", "round and round!", (1230, 700), 64, o + wt(LESSON, "round"), n4 - o - wt(LESSON, "round") - 0.1, color=WHITE, stroke=None)
+    text(f"le_num{n}", n, (760, 240), 150, s, e - s - 0.1, color=YELLOW, stroke=None)
+# 1-3: big animated demos on the board
+L.extend(kit.toothpaste_demo("le_tp_", n1 + 0.3, n2 - n1 - 0.4, center=(1250, 470), sc=0.85, card=False))
+L.extend(kit.mouth_demo("le_ud_", n2 + 0.3, n3 - n2 - 0.4, "updown", center=(1270, 480), sc=0.85, card=False))
+L.extend(kit.mouth_demo("le_rr_", n3 + 0.3, n4 - n3 - 0.4, "circles", center=(1270, 480), sc=0.85, card=False))
 # 4: two times a day, morning + night
 text("le_t4", "2 times every day", (1230, 360), 80, o + wt(LESSON, "two", 2), nturn - o - wt(LESSON, "two", 2) - 0.1, color=WHITE, stroke=None)
 prop("le_sun", sun_icon(85), (1050, 560), o + wt(LESSON, "morning"), nturn - o - wt(LESSON, "morning") - 0.1, wiggle=8)
@@ -457,6 +438,14 @@ pos_keys = [{"time": 0, "value": [900, 720], "easing": "step"},
             {"time": CUT_LESSON, "value": POS["lesson"], "easing": "step"},
             {"time": CUT_BATH2, "value": POS["bath"], "easing": "step"},
             {"time": CUT_NIGHT, "value": POS["bed"], "easing": "step"}]
+# step aside (to the left) while a close-up demo is on screen
+DEMO_WINDOWS = [(a + s0, a + s1) for a, _ in SONGS for s0, s1 in [(14.3, 19.05), (19.1, 29.8), (47.9, 50.3), (67.1, 77.8), (81.4, 83.9)]]
+ASIDE = [330, POS["bath"][1]]
+extra = []
+for w0, w1 in DEMO_WINDOWS:
+    extra += [{"time": w0, "value": POS["bath"], "easing": "ease_in_out"}, {"time": w0 + 0.4, "value": ASIDE},
+              {"time": w1, "value": ASIDE, "easing": "ease_in_out"}, {"time": w1 + 0.4, "value": POS["bath"], "easing": "step"}]
+pos_keys = sorted(pos_keys + extra, key=lambda k: k["time"])
 songs_cond = " or ".join(f"(time>={a:.2f} and time<{b:.2f})" for a, b in SONGS)
 songs_start = " ".join(f"if time>={a:.2f} and time<{b:.2f} then s={a:.2f} end;" for a, b in SONGS)
 bounce = (f"if time<4.7 then return value end; local s=0; {songs_start} "
