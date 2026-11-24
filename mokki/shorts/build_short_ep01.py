@@ -48,7 +48,7 @@ for i, (x, p, off) in enumerate([(120, 4.2, 0.3), (330, 5.1, 2.0), (760, 4.6, 1.
                                           "expression": f"local t=(time+{off})%{p}; return Vec.v2({x}+25*math.sin(t*3), 2000-t/{p}*2100)"}}})
 
 # ---- hook text
-L += kit.kid_text("hook", "Brush with Mokki!", (540, 330), 110, 0.1, HOOK + 1.2, color=CORAL, wrap=950, wobble=True)
+L += kit.kid_text("hook", "Brush with Mokki!", (540, 440), 110, 0.1, HOOK + 1.2, color=CORAL, wrap=950, wobble=True)
 
 # ---- lyrics (only the lines that are in the cut)
 LYRICS = [(9.2, 11.9, "Wake up, wake up, the sun says hi!"), (11.95, 14.25, "Mokki stretches to the sky!"),
@@ -60,7 +60,7 @@ LYRICS = [(9.2, 11.9, "Wake up, wake up, the sun says hi!"), (11.95, 14.25, "Mok
 COLORS = ["#F0506E", "#2BB673", "#4A90E2", "#FF8A00", "#9B59D0"]
 for i, (s, e, line) in enumerate(LYRICS):
     t0 = song_t(s)
-    L += kit.kid_text(f"ly{i}", line, (540, 330), 84, t0, e - s, color=COLORS[i % 5], pop=False, wrap=960)
+    L += kit.kid_text(f"ly{i}", line, (540, 440), 84, t0, e - s, color=COLORS[i % 5], pop=False, wrap=960)
 
 # ---- demos in the upper middle, Mokki below
 C = (540, 860)
