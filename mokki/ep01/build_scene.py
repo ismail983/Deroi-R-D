@@ -290,8 +290,8 @@ for si, (a, b) in enumerate(SONGS):
 
 # ---------------------------------------------------------------- INTRO props (bedroom)
 o = T_INTRO
-prop("in_fuzzy1", zigzag_icon(), (1250, 780), o + wt(INTRO, "teeth") - 0.1, 3.6, wiggle=10)
-prop("in_fuzzy2", zigzag_icon(), (1270, 850), o + wt(INTRO, "teeth") + 0.1, 3.4, wiggle=-10)
+prop("in_fuzzy1", zigzag_icon(), (1150, 720), o + wt(INTRO, "teeth") - 0.1, 3.6, s=1.5, wiggle=10)
+prop("in_fuzzy2", zigzag_icon(), (1165, 775), o + wt(INTRO, "teeth") + 0.1, 3.4, s=1.5, wiggle=-10)
 text("in_fuzzytxt", "Fuzzy teeth?", (960, 140), 92, o + wt(INTRO, "fuzzy"), 3.2, wobble=True)
 prop("in_brush", toothbrush_icon(), (1330, 560), o + wt(INTRO, "toothbrush"), 2.9, s=1.3, wiggle=15)
 text("title1", "Brush Your Teeth\nwith Mokki!", (960, 150), 100, 0.4, 3.0)
@@ -371,7 +371,7 @@ def song_props(si, a):
     # toothbrush in Mokki's hand while singing
     b = a + SONG_LEN
     L.append({"id": p + "hbrush", "parentId": "mokki", "start": a, "duration": b - a, "timeMode": "layer",
-              "transform": {"position": [1150, 980], "scale": [1.6, 1.6], "rotation": -60},
+              "transform": {"position": [1150, 800], "scale": [1.3, 1.3], "rotation": -60},
               "content": {"kind": "shape", "items": toothbrush_icon(False)},
               "animations": {"rotation": {"keyframes": [{"time": 0, "value": -60}], "expression": "return value+15*math.sin(2*math.pi*time/0.3)"},
                              "opacity": {"keyframes": [{"time": 0, "value": 0}, {"time": 0.3, "value": 1}]}}})
@@ -576,6 +576,10 @@ for id_, start, uri in [("v_intro", T_INTRO, V_INTRO), ("v_story", T_STORY, V_ST
 
 scene = {"version": "1.0", "composition": {"width": 1920, "height": 1080, "fps": 30, "duration": END, "background": "#FFF1C1"},
          "layers": L}
+for l in L:
+    for k in ("start", "duration"):
+        if k in l:
+            l[k] = round(round(l[k] * 30) / 30, 4)
 ids = [l["id"] for l in L]
 assert len(ids) == len(set(ids)), [i for i in ids if ids.count(i) > 1]
 json.dump(scene, open("ep01-scene.json", "w"), separators=(",", ":"))
