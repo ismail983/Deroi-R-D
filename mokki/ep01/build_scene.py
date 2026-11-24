@@ -443,9 +443,14 @@ for i, (x, y) in enumerate([(1250, 520), (1350, 420), (1180, 380)]):
 
 # ---------------------------------------------------------------- MOKKI
 W, H = 1128, 1318
-POS = {"bed": [1050, 1000], "bath": [900, 1025], "lesson": [430, 1000]}
-pos_keys = [{"time": 0, "value": [880, 690], "easing": "step"},
-            {"time": 3.9, "value": [880, 690], "easing": "ease_out"},
+# the image is fitted ("contain") into a 1920x1080 layer box; map image pixels to layer-local pixels
+S = 1080 / H
+OFFX = (1920 - W * S) / 2
+def m(px, py):
+    return [round(OFFX + px * S, 2), round(py * S, 2)]
+POS = {"bed": [1050, 890], "bath": [900, 905], "lesson": [430, 890]}
+pos_keys = [{"time": 0, "value": [900, 720], "easing": "step"},
+            {"time": 3.9, "value": [900, 720], "easing": "ease_out"},
             {"time": 4.3, "value": [980, 600], "easing": "ease_in"},
             {"time": 4.7, "value": POS["bed"], "easing": "step"},
             {"time": CUT_BATH1, "value": POS["bath"], "easing": "step"},
@@ -473,7 +478,7 @@ rot_expr = (f"if time<4.5 then return value end; local r=value+4*math.sin(2*math
             f"if time>={lean0:.2f} and time<{lean1:.2f} then r=r-9*math.sin(math.pi*(time-{lean0:.2f})/{lean1 - lean0:.2f}) end; "
             f"if time>={wave0:.2f} and time<{wave1:.2f} then r=r+12*math.sin(time*10) end; return r")
 L.append({"id": "mokki", "content": {"kind": "media", "asset": {"type": "image", "uri": MOKKI, "width": W, "height": H}},
-          "transform": {"anchor": [W / 2, H], "position": [880, 690], "scale": [0.5, 0.5]},
+          "transform": {"anchor": [960, 1080], "position": [900, 720], "scale": [0.5, 0.5]},
           "animations": {
               "scale": {"keyframes": [{"time": 0, "value": [0.5, 0.5]}, {"time": END - 1.0, "value": [0.5, 0.5], "easing": "ease_in"},
                                       {"time": END, "value": [0, 0]}], "expression": squash},
@@ -513,9 +518,9 @@ MOUTH_O = ("local W=" + mouth_table() + "; local o=0; "
            "if k==0 then o=0.3+0.7*math.abs(math.sin(math.pi*(time-s)/0.17)) "
            "elseif k==1 then o=1.4*math.sin(math.pi*(time-s)/(e-s)) "
            "elseif k==2 then o=0.35+0.45*math.abs(math.sin(time*28)) else o=1.1 end; break end end; ")
-MX, MY = 586, 945
+MX, MY = m(586, 945)
 # closed smile, hidden while the mouth is open
-L.append({"id": "mouth_smile", "parentId": "mokki", "transform": {"position": [MX, MY]},
+L.append({"id": "mouth_smile", "parentId": "mokki", "transform": {"position": [MX, MY], "scale": [S, S]},
           "content": {"kind": "shape", "items": [
               {"type": "path", "closed": False, "vertices": [
                   {"point": [-127, -40], "outTangent": [30, 45]},
@@ -524,12 +529,12 @@ L.append({"id": "mouth_smile", "parentId": "mokki", "transform": {"position": [M
               {"type": "stroke", "color": NAVY, "width": 24, "lineCap": "round", "lineJoin": "round"}]},
           "animations": {"opacity": {"keyframes": [{"time": 0, "value": 1}], "expression": MOUTH_O + "if o>0.08 then return 0 end; return 1"}}})
 # open mouth: navy oval + pink tongue, scaled by openness
-L.append({"id": "mouth_open", "parentId": "mokki", "transform": {"position": [MX, MY - 10]},
+L.append({"id": "mouth_open", "parentId": "mokki", "transform": {"position": [MX, MY - 8]},
           "content": {"kind": "shape", "items": [
               group(ell([0, 32], [96, 44], "#FF7A93")),
               group([{"type": "ellipse", "position": [0, 0], "size": [170, 130]}, {"type": "fill", "color": NAVY}])]},
           "animations": {"scale": {"keyframes": [{"time": 0, "value": [1, 1]}],
-                                   "expression": MOUTH_O + "if o<0.08 then return Vec.v2(0,0) end; return Vec.v2(0.75+0.25*math.min(o,1.2), 0.25+0.85*o)"}}})
+                                   "expression": MOUTH_O + "if o<0.08 then return Vec.v2(0,0) end; return Vec.v2(%.4f*(0.75+0.25*math.min(o,1.2)), %.4f*(0.25+0.85*o))" % (S, S)}}})
 
 # ---- eyelids (blink every ~3.9 s, closed during yawns and "Mwah")
 closed = yawns + [(T_BYE + wt(BYE, "Mwah"), T_BYE + wt(BYE, "Mwah") + 0.6), (0, 0.9)]
@@ -538,11 +543,11 @@ BLINK = (f"local C={cl_lua}; for i=1,#C,2 do if time>=C[i] and time<C[i+1] then 
          "local p=(time+0.7)%3.9; local k=0; if p<0.08 then k=p/0.08 elseif p<0.13 then k=1 elseif p<0.21 then k=(0.21-p)/0.08 end; "
          "if b==1 then k=1 end; ")
 for eid, cx, cy, d in [("L", 410, 715.5, 344), ("R", 742.5, 721.5, 228)]:
-    L.append({"id": f"lid{eid}", "parentId": "mokki", "transform": {"position": [cx, cy - d / 2]},
+    L.append({"id": f"lid{eid}", "parentId": "mokki", "transform": {"position": m(cx, cy - d / 2)},
               "content": {"kind": "shape", "items": ell([0, d / 2], [d, d], BODY)},
               "animations": {"scale": {"keyframes": [{"time": 0, "value": [1, 0]}],
-                                       "expression": "local b=0; " + BLINK + "return Vec.v2(1,k)"}}})
-    L.append({"id": f"lidline{eid}", "parentId": "mokki", "transform": {"position": [cx, cy]},
+                                       "expression": "local b=0; " + BLINK + "return Vec.v2(%.4f,%.4f*k)" % (S, S)}}})
+    L.append({"id": f"lidline{eid}", "parentId": "mokki", "transform": {"position": m(cx, cy), "scale": [S, S]},
               "content": {"kind": "shape", "items": [
                   {"type": "path", "closed": False, "vertices": [
                       {"point": [-d * .42, 0], "outTangent": [d * .2, d * .22]},
@@ -553,7 +558,7 @@ for eid, cx, cy, d in [("L", 410, 715.5, 344), ("R", 742.5, 721.5, 228)]:
 
 # bedroom blanket over Mokki while he is in bed
 L.append({"id": "blanket", "start": 0, "duration": 4.1, "timeMode": "layer", "transform": {"position": [0, 0], "anchor": [0, 0]},
-          "content": {"kind": "shape", "items": rect([800, 760], [440, 220], "#6CC79A", 60) +
+          "content": {"kind": "shape", "items": rect([760, 760], [480, 220], "#6CC79A", 60) +
                       [{"type": "stroke", "color": GREEN, "width": 8}]},
           "animations": {"opacity": {"keyframes": [{"time": 3.8, "value": 1}, {"time": 4.1, "value": 0}]}}})
 
