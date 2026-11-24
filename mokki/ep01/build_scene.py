@@ -14,7 +14,7 @@ V_LESSON = "https://gcdn.picsart.com/picsart-mcp/273d020b-8f6a-454b-b66f-91a80ae
 V_BYE = "https://gcdn.picsart.com/picsart-mcp/489a0ae2-f87e-4d71-9c57-deb54f235954.mp3"
 
 T_INTRO, T_STORY, T_SONG1, T_LESSON, T_SONG2, T_BYE = 0.8, 18.5, 45.5, 136.5, 172.5, 263.5
-SONG_LEN, END = 90.0, 281.0
+SONG_LEN, END = 90.0, 279.8
 SONGS = [(T_SONG1, T_SONG1 + SONG_LEN), (T_SONG2, T_SONG2 + SONG_LEN)]
 # set changes happen at the peak of a wipe
 CUT_BATH1, CUT_LESSON, CUT_BATH2, CUT_NIGHT = 16.25, 136.25, 172.25, 263.25
