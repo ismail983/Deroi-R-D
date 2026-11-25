@@ -455,3 +455,83 @@ def swish_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
                                            "expression": f"local t=(time+{off:.2f})%1.5; "
                                                          f"return Vec.v2({cx - 160 * sc:.0f}+{230 * sc:.0f}*t/1.5+{20 * (i % 3 - 1)}, {cy - 120 * sc:.0f}+{300 * sc:.0f}*(t/1.5)^2)"}}))
     return L
+
+
+# ------------------------------------------------------------------ family rig (Papa, Mama, Pia, Pip, Grandpa, Granny)
+import json as _json, os as _os
+FAMILY_META = _json.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "character", "family", "family.json")))
+# Picsart-hosted copies of mokki/character/family/<id>-nomouth.png (expiring; re-upload when needed)
+FAMILY_URLS = {}
+
+
+def family_rig(cid, words, pos_keys, scale=0.5, closed=(), pos_expr=None, rot_expr=None, scale_keys=None, box=(1920, 1080), prefix=None):
+    """Like mokki_rig, for a family member. Same visual scale rule: at scale s, a character appears as big
+    relative to Mokki as in the family line-up (pass the same s you give Mokki)."""
+    meta = FAMILY_META[cid]
+    iw, ih = meta["w"], meta["h"]
+    bw, bh = box
+    fit = min(bw / iw, bh / ih)
+    ox, oy = (bw - iw * fit) / 2, (bh - ih * fit) / 2
+    mp = lambda px, py: [round(ox + px * fit, 2), round(oy + py * fit, 2)]
+    anchor = [round(ox + iw * fit / 2, 2), round(oy + ih * fit, 2)]
+    # keep the line-up proportions: Mokki's picture is MH px tall and fitted with box_map's scale
+    mok_fit = box_map(box)[0]
+    rel = mok_fit / fit                          # this character's px are drawn at the same size as Mokki's px
+    s = scale * rel
+    id_ = prefix or cid
+    anim = {"position": {"keyframes": pos_keys}, "scale": {"keyframes": scale_keys or [{"time": 0, "value": [s, s]}]},
+            "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": rot_expr or "return value+3*math.sin(2*math.pi*time/2.8)"}}
+    if scale_keys:
+        for k in anim["scale"]["keyframes"]:
+            k["value"] = [k["value"][0] * rel, k["value"][1] * rel]
+    if pos_expr:
+        anim["position"]["expression"] = pos_expr
+    L = [{"id": id_, "content": {"kind": "media", "asset": {"type": "image", "uri": FAMILY_URLS[cid], "width": iw, "height": ih}},
+          "transform": {"anchor": anchor, "position": pos_keys[0]["value"], "scale": [s, s]}, "animations": anim}]
+    mouth_o = ("local W=" + mouth_table(words) + "; local o=0; "
+               "for i=1,#W,3 do local s=W[i]; if s>time then break end; local e=W[i+1]; "
+               "if time<e then local k=W[i+2]; "
+               "if k==0 then o=0.3+0.7*math.abs(math.sin(math.pi*(time-s)/0.17)) "
+               "elseif k==1 then o=1.4*math.sin(math.pi*(time-s)/(e-s)) "
+               "elseif k==2 then o=0.35+0.45*math.abs(math.sin(time*28)) else o=1.1 end; break end end; ")
+    fx, fy, fw = meta["face"]["mouth"]
+    mx, my = mp(fx, fy)
+    k = fw * fit / 254.0                           # mouth width relative to Mokki's smile path (254 px)
+    if cid != "pip":                               # Pip keeps his pacifier drawn on
+        L.append({"id": id_ + "_smile", "parentId": id_, "transform": {"position": [mx, my - 6 * k], "scale": [k, k]},
+                  "content": {"kind": "shape", "items": [
+                      {"type": "path", "closed": False, "vertices": [
+                          {"point": [-127, -40], "outTangent": [30, 45]},
+                          {"point": [0, 46], "inTangent": [-70, 0], "outTangent": [70, 0]},
+                          {"point": [127, -46], "inTangent": [-30, 45]}]},
+                      {"type": "stroke", "color": NAVY, "width": 26, "lineCap": "round", "lineJoin": "round"}]},
+                  "animations": {"opacity": {"keyframes": [{"time": 0, "value": 1}],
+                                             "expression": mouth_o + "if o>0.08 then return 0 end; return 1"}}})
+        L.append({"id": id_ + "_mouth", "parentId": id_, "transform": {"position": [mx, my]},
+                  "content": {"kind": "shape", "items": [group(ell([0, 32], [96, 44], "#FF7A93")),
+                                                         group([{"type": "ellipse", "position": [0, 0], "size": [170, 130]},
+                                                                {"type": "fill", "color": NAVY}])]},
+                  "animations": {"scale": {"keyframes": [{"time": 0, "value": [1, 1]}],
+                                           "expression": mouth_o + "if o<0.08 then return Vec.v2(0,0) end; "
+                                           f"return Vec.v2({k:.4f}*(0.75+0.25*math.min(o,1.2)), {k:.4f}*(0.25+0.85*o))"}}})
+    cl = "{" + ",".join(f"{a:.2f},{b:.2f}" for a, b in closed) + "}" if closed else "{}"
+    blink = (f"local b=0; local C={cl}; for i=1,#C,2 do if time>=C[i] and time<C[i+1] then b=1 end end; "
+             f"local p=(time+{(sum(map(ord, cid)) % 30) / 10:.1f})%4.3; local k=0; if p<0.08 then k=p/0.08 elseif p<0.13 then k=1 elseif p<0.21 then k=(0.21-p)/0.08 end; "
+             "if b==1 then k=1 end; ")
+    body = meta["body"]
+    for side in ("L", "R"):
+        ex, ey, ed = meta["face"]["eye" + side]
+        d = ed * 1.04
+        L.append({"id": f"{id_}_lid{side}", "parentId": id_, "transform": {"position": mp(ex, ey - d / 2)},
+                  "content": {"kind": "shape", "items": ell([0, d / 2], [d, d], body)},
+                  "animations": {"scale": {"keyframes": [{"time": 0, "value": [1, 0]}],
+                                           "expression": blink + f"return Vec.v2({fit:.4f},{fit:.4f}*k)"}}})
+        L.append({"id": f"{id_}_lidline{side}", "parentId": id_, "transform": {"position": mp(ex, ey), "scale": [fit, fit]},
+                  "content": {"kind": "shape", "items": [
+                      {"type": "path", "closed": False, "vertices": [
+                          {"point": [-d * .42, 0], "outTangent": [d * .2, d * .22]},
+                          {"point": [d * .42, 0], "inTangent": [-d * .2, d * .22]}]},
+                      {"type": "stroke", "color": NAVY, "width": 14, "lineCap": "round"}]},
+                  "animations": {"opacity": {"keyframes": [{"time": 0, "value": 0}],
+                                             "expression": blink + "if k>0.85 then return 1 end; return 0"}}})
+    return L
