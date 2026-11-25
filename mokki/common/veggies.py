@@ -72,8 +72,8 @@ def corn_icon(cute=True):
 
 def peapod_icon(cute=True, peas=3):
     ps = [{"type": "ellipse", "position": [x, 0], "size": [60, 60]} for x in (-70, 0, 70)[:peas]]
-    return (face(0, -4, 0.55) if cute else []) + [
-        group(ps + [{"type": "fill", "color": "#9EE06A"}, {"type": "stroke", "color": LEAF_D, "width": 5}]),
+    pea_g = [group(ps + [{"type": "fill", "color": "#9EE06A"}, {"type": "stroke", "color": LEAF_D, "width": 5}])] if ps else []
+    return (face(0, -4, 0.55) if cute else []) + pea_g + [
         group(ell([0, -6], [250, 60], "#BFF08C")),
         group([{"type": "ellipse", "position": [0, 0], "size": [270, 110]}, {"type": "fill", "color": LEAF},
                {"type": "stroke", "color": LEAF_D, "width": 6}]),

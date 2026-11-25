@@ -58,7 +58,7 @@ L += vg.rainbow_plate_demo("plate_", song_t(18.95), 2.3, C, sc=0.8)
 L += vg.grow_demo("grow_", song_t(21.25), 2.4, C, sc=0.8)
 L += vg.bite_demo("bite_", song_t(23.65), 2.3, "carrot", C, sc=0.8, bites=(0.6,))
 t_sky = song_t(25.95)
-L += kit.kid_text("sky", "Reach the sky!", C, 110, t_sky + 0.2, TB - t_sky - 0.2, color="#4A90E2", wobble=True)
+L += kit.kid_text("skytxt", "Reach the sky!", C, 110, t_sky + 0.2, TB - t_sky - 0.2, color="#4A90E2", wobble=True)
 for i, v in enumerate(VEG_ORDER):
     x = 120 + i * 168
     L.append({"id": f"up{i}", "start": snap(t_sky + 0.1 * i), "duration": snap(TB - t_sky - 0.1 * i), "timeMode": "layer",
