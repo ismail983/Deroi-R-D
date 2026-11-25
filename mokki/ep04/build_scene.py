@@ -184,7 +184,7 @@ for k, (word, v, nxt) in enumerate([("orange", "carrot", "green"), ("green", "br
     t0 = wt("intro", word)
     t1 = wt("intro", nxt) if nxt else CUT_KITCHEN
     text(f"t_col{k}", word.capitalize() + "!", (960, 130), 110, t0, t1 - t0, color=vg.VEG_COLOR[v], wobble=True)
-    L.append(vg.veg_layer(f"i_veg{k}", v, (930, 420), t0, t1 - t0, s=1.3, wiggle=10))
+    L.append(vg.veg_layer(f"i_veg{k}", v, (790, 400), t0, t1 - t0, s=1.3, wiggle=10))
 
 # ================================================================ STORY (kitchen)
 text("t_lunch", "Lunch time!", (960, 110), 100, wt("granny1", "Lunch"), wt("granny1", "Yummy") - wt("granny1", "Lunch"), color="#C9733A")
@@ -221,24 +221,6 @@ for i in range(12):
                   wt("granny3", "Hooray") + 0.05 * i, 1.6, spin=300))
 # the carrot: Granny offers it, Mokki holds it and bites
 L.append(vg.veg_layer("st_offer", "carrot", (1240, 560), b0, T["mokki2"] - b0, s=0.45, wiggle=10))
-hp = kit.hand_pos()
-L.append({"id": "st_hold", "parentId": "mokki", "start": snap(T["mokki2"]), "duration": snap(T["granny3"] + 1.5 - T["mokki2"]), "timeMode": "layer",
-          "transform": {"position": [hp[0] + 40, hp[1] - 60], "rotation": -35},
-          "content": {"kind": "shape", "items": vg.carrot_icon(False)},
-          "animations": {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.3, "value": [1.1, 1.1]},
-                                                 {"time": cr - T["mokki2"], "value": [1.1, 1.1], "easing": "ease_out"},
-                                                 {"time": cr - T["mokki2"] + 0.2, "value": [1.1, 0.75]}]},
-                         "position": {"keyframes": [{"time": 0, "value": [hp[0] + 40, hp[1] - 60]},
-                                                    {"time": cr - T["mokki2"] - 0.5, "value": [hp[0] + 40, hp[1] - 60], "easing": "ease_in"},
-                                                    {"time": cr - T["mokki2"], "value": [hp[0] - 40, hp[1] - 30], "easing": "ease_out"},
-                                                    {"time": cr - T["mokki2"] + 0.5, "value": [hp[0] + 60, hp[1] - 40]}]}}})
-for i, (dx, dy) in enumerate([(120, -60), (160, 20), (90, 60)]):
-    L.append({"id": f"st_crumb{i}", "parentId": "mokki", "start": snap(cr), "duration": 0.8, "timeMode": "layer",
-              "content": {"kind": "shape", "items": [group(ell([0, 0], [40, 32], vg.ORANGE))]},
-              "animations": {"position": {"keyframes": [{"time": 0, "value": [hp[0] - 40, hp[1] - 30], "easing": "ease_out"},
-                                                        {"time": 0.8, "value": [hp[0] - 40 + dx * 2, hp[1] - 30 + dy * 2]}]},
-                             "scale": {"keyframes": [{"time": 0, "value": [1, 1]}, {"time": 0.8, "value": [0, 0]}]}}})
-
 # ================================================================ SONG (garden)
 C = (1230, 520)
 
@@ -376,8 +358,28 @@ mwords.append((cr, cr + 0.5, 3))    # big open mouth for the crunch
 L += mokki_rig("mokki", mwords, pos_keys, scale=0.5, pos_expr=bounce, rot_expr=rot,
                scale_keys=[{"time": 0, "value": [0.5, 0.5]}, {"time": END - 0.8, "value": [0.5, 0.5], "easing": "ease_in"}, {"time": END, "value": [0, 0]}],
                closed=[(yum0, yum0 + 0.7)])
+HOLD = []
+hp = kit.hand_pos()
+HOLD.append({"id": "st_hold", "parentId": "mokki", "start": snap(T["mokki2"]), "duration": snap(T["granny3"] + 1.5 - T["mokki2"]), "timeMode": "layer",
+          "transform": {"position": [hp[0] + 40, hp[1] - 60], "rotation": -35},
+          "content": {"kind": "shape", "items": vg.carrot_icon(False)},
+          "animations": {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.3, "value": [1.1, 1.1]},
+                                                 {"time": cr - T["mokki2"], "value": [1.1, 1.1], "easing": "ease_out"},
+                                                 {"time": cr - T["mokki2"] + 0.2, "value": [1.1, 0.75]}]},
+                         "position": {"keyframes": [{"time": 0, "value": [hp[0] + 40, hp[1] - 60]},
+                                                    {"time": cr - T["mokki2"] - 0.5, "value": [hp[0] + 40, hp[1] - 60], "easing": "ease_in"},
+                                                    {"time": cr - T["mokki2"], "value": [hp[0] - 40, hp[1] - 30], "easing": "ease_out"},
+                                                    {"time": cr - T["mokki2"] + 0.5, "value": [hp[0] + 60, hp[1] - 40]}]}}})
+for i, (dx, dy) in enumerate([(120, -60), (160, 20), (90, 60)]):
+    HOLD.append({"id": f"st_crumb{i}", "parentId": "mokki", "start": snap(cr), "duration": 0.8, "timeMode": "layer",
+              "content": {"kind": "shape", "items": [group(ell([0, 0], [40, 32], vg.ORANGE))]},
+              "animations": {"position": {"keyframes": [{"time": 0, "value": [hp[0] - 40, hp[1] - 30], "easing": "ease_out"},
+                                                        {"time": 0.8, "value": [hp[0] - 40 + dx * 2, hp[1] - 30 + dy * 2]}]},
+                             "scale": {"keyframes": [{"time": 0, "value": [1, 1]}, {"time": 0.8, "value": [0, 0]}]}}})
+
+L += HOLD
 # Granny Mo (talks in the kitchen) and Grandpa Moss (silent, waves)
-GR, GP = (1380, 905), (1690, 905)
+GR, GP = (1200, 905), (1640, 905)
 wave_rot = lambda t: f"local r=value+3*math.sin(time*2); if time>{t:.2f} then r=r+10*math.sin(time*9) end; return r"
 L += place(family_rig("grandma", [], [{"time": 0, "value": list(GR)}], scale=0.5, prefix="gma_i", rot_expr=wave_rot(wt("intro", "Granny") - 0.0)),
            0, CUT_KITCHEN)
@@ -388,9 +390,9 @@ for clip in ("granny1", "granny2", "granny3"):
     gw += words_from_transcript(W[clip], T[clip] - CUT_KITCHEN)
 L += place(family_rig("grandma", gw, [{"time": 0, "value": [1500, 905]}], scale=0.5, prefix="gma_k",
                       rot_expr=wave_rot(wt("granny3", "Hooray") - CUT_KITCHEN)), CUT_KITCHEN, CUT_SONG1 - CUT_KITCHEN)
-L += place(family_rig("grandma", [], [{"time": 0, "value": [1330, 905]}], scale=0.5, prefix="gma_b", rot_expr=wave_rot(wave0 - CUT_BYE)),
+L += place(family_rig("grandma", [], [{"time": 0, "value": [1180, 905]}], scale=0.5, prefix="gma_b", rot_expr=wave_rot(wave0 - CUT_BYE)),
            CUT_BYE, END - CUT_BYE)
-L += place(family_rig("grandpa", [], [{"time": 0, "value": [1660, 905]}], scale=0.5, prefix="gpa_b", rot_expr=wave_rot(wave0 - CUT_BYE)),
+L += place(family_rig("grandpa", [], [{"time": 0, "value": [1620, 905]}], scale=0.5, prefix="gpa_b", rot_expr=wave_rot(wave0 - CUT_BYE)),
            CUT_BYE, END - CUT_BYE)
 
 # ================================================================ wipes + audio
