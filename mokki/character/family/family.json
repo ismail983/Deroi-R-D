@@ -21,8 +21,8 @@
     329.9
    ]
   },
-  "body": "#6CCFB6",
-  "outline": "#17766A"
+  "body": "#8CCBFA",
+  "outline": "#2A6FB0"
  },
  "mama": {
   "name": "Mama Mimi",
@@ -46,8 +46,8 @@
     302.8
    ]
   },
-  "body": "#B4EDA0",
-  "outline": "#4E9A2E"
+  "body": "#FFB8CF",
+  "outline": "#D65A86"
  },
  "pia": {
   "name": "Pia (little sister)",
@@ -71,8 +71,8 @@
     221.7
    ]
   },
-  "body": "#A6F0DA",
-  "outline": "#2A9C7C"
+  "body": "#D5BDF7",
+  "outline": "#7B55C7"
  },
  "pip": {
   "name": "Pip (baby brother)",
@@ -96,8 +96,8 @@
     178.5
    ]
   },
-  "body": "#9BE3F0",
-  "outline": "#1F8CA3"
+  "body": "#FFE58A",
+  "outline": "#D19A12"
  },
  "grandpa": {
   "name": "Grandpa Moss",
@@ -121,8 +121,8 @@
     302.8
    ]
   },
-  "body": "#A9CDB8",
-  "outline": "#4F7A63"
+  "body": "#FFC99A",
+  "outline": "#C9733A"
  },
  "grandma": {
   "name": "Granny Mo",
@@ -146,7 +146,7 @@
     286.6
    ]
   },
-  "body": "#C9E7C2",
-  "outline": "#5E8F66"
+  "body": "#F9CFC3",
+  "outline": "#B9705E"
  }
 }

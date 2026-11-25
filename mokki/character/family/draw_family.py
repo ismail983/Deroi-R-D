@@ -19,17 +19,17 @@ def hexc(h):
 
 FAMILY = [
     # id, name, size, body, outline, accent, eyes(left r, right r), n bumps, extras
-    dict(id="papa", name="Papa Moko", size=1.22, body="#6CCFB6", line="#17766A", bead="#4A90E2", eyes=(0.27, 0.27), bumps=14,
+    dict(id="papa", name="Papa Moko", size=1.22, body="#8CCBFA", line="#2A6FB0", bead="#FFD23F", eyes=(0.27, 0.27), bumps=14,
          extras=["mustache", "brows"]),
-    dict(id="mama", name="Mama Mimi", size=1.12, body="#B4EDA0", line="#4E9A2E", bead="#FF8FB8", eyes=(0.27, 0.27), bumps=13,
+    dict(id="mama", name="Mama Mimi", size=1.12, body="#FFB8CF", line="#D65A86", bead="#FF6B9A", eyes=(0.27, 0.27), bumps=13,
          extras=["flower", "lashes"]),
-    dict(id="pia", name="Pia (little sister)", size=0.82, body="#A6F0DA", line="#2A9C7C", bead="#FF6B9A", eyes=(0.33, 0.33), bumps=11,
+    dict(id="pia", name="Pia (little sister)", size=0.82, body="#D5BDF7", line="#7B55C7", bead="#FF6B9A", eyes=(0.33, 0.33), bumps=11,
          extras=["bow", "lashes"]),
-    dict(id="pip", name="Pip (baby brother)", size=0.66, body="#9BE3F0", line="#1F8CA3", bead="#FFD23F", eyes=(0.36, 0.36), bumps=10,
+    dict(id="pip", name="Pip (baby brother)", size=0.66, body="#FFE58A", line="#D19A12", bead="#4A90E2", eyes=(0.36, 0.36), bumps=10,
          extras=["sprout", "pacifier"]),
-    dict(id="grandpa", name="Grandpa Moss", size=1.12, body="#A9CDB8", line="#4F7A63", bead="#B0B7BF", eyes=(0.22, 0.22), bumps=13,
+    dict(id="grandpa", name="Grandpa Moss", size=1.12, body="#FFC99A", line="#C9733A", bead="#B0B7BF", eyes=(0.22, 0.22), bumps=13,
          extras=["glasses", "white_brows", "white_mustache", "droopy"]),
-    dict(id="grandma", name="Granny Mo", size=1.06, body="#C9E7C2", line="#5E8F66", bead="#C9A2E8", eyes=(0.22, 0.22), bumps=12,
+    dict(id="grandma", name="Granny Mo", size=1.06, body="#F9CFC3", line="#B9705E", bead="#C9A2E8", eyes=(0.22, 0.22), bumps=12,
          extras=["glasses", "bun", "pearls", "lashes"]),
 ]
 
@@ -151,7 +151,7 @@ def draw_char(c, mouth=True):
         for k in range(5):
             a = 2 * math.pi * k / 5
             px, py = fx + 0.09 * R * math.cos(a), fy + 0.09 * R * math.sin(a)
-            d.ellipse([px - 0.075 * R, py - 0.075 * R, px + 0.075 * R, py + 0.075 * R], fill=hexc("#FF8FB8"))
+            d.ellipse([px - 0.075 * R, py - 0.075 * R, px + 0.075 * R, py + 0.075 * R], fill=hexc("#FFFFFF"), outline=hexc("#D65A86"), width=int(t * 0.35))
         d.ellipse([fx - 0.05 * R, fy - 0.05 * R, fx + 0.05 * R, fy + 0.05 * R], fill=hexc("#FFD23F"))
     if "bow" in c["extras"]:
         bx, by = cx - 0.36 * R, top + 0.14 * R
