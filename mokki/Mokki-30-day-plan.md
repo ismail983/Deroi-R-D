@@ -129,3 +129,14 @@ Brush, brush, brush your teeth! 🪥 Join Mokki and his friends Lulu and Peanut 
 #BrushYourTeeth #NurseryRhymes #KidsSongs #ToddlerLearning #MokkiAndFriends
 
 **Tags:** brush your teeth song, toothbrush song, kids songs, nursery rhymes, toddler songs, healthy habits for kids, preschool songs, baby songs, mokki and friends
+
+## Publishing workflow (agreed with the channel owner)
+Every new episode + Short is uploaded automatically to the Mokki & Friends channel right after it is made
+(YouTube via the Composio connection): upload private with title/description/tags, category Education (27),
+then set selfDeclaredMadeForKids=true, containsSyntheticMedia=true, language en, and publish.
+Also save both MP4s to Picsart Drive "Mokki & Friends/Ready to upload" and paste title/description/tags in chat.
+
+| Ep | Full video | Short |
+|---|---|---|
+| 3 Bath Time | https://youtu.be/g7je4QvKxUI | https://youtube.com/shorts/myiHdPEtKbk |
+| 4 Yummy Vegetables | https://youtu.be/tyJCAxVLveM | https://youtube.com/shorts/uT5df6_dqo0 |
