@@ -125,12 +125,14 @@ def set_garden(s, e):
 def set_kitchen(s, e, night=False):
     bg("k_wall", rect([960, 440], [1920, 880], "#3E4C7A" if night else "#FFE9C7"), s, e)
     bg("k_floor", rect([960, 980], [1920, 200], "#D9A878") + rect([960, 882], [1920, 8], "#B9875A"), s, e)
-    bg("k_window", rect([350, 300], [300, 260], "#1B2550" if night else "#9ED8FF", 20) + rect([350, 300], [340, 300], WHITE, 30), s, e)
+    wx = 1700 if night else 350
+    bg("k_window", rect([wx, 260], [260, 220], "#1B2550" if night else "#9ED8FF", 20) + rect([wx, 260], [300, 260], WHITE, 30), s, e)
     if night:
-        L.append(shape_layer("k_moon", kit.moon_icon(45, "#1B2550") if hasattr(kit, "moon_icon") else ell([0, 0], [90, 90], "#FFE58A"),
-                             s, e - s, (380, 280)))
+        L.append(shape_layer("k_moon", ell([0, 0], [80, 80], "#FFE58A"),
+                             s, e - s, (1720, 240)))
         bg("k_lamp", ell([960, 160], [260, 120], "#FFE58A") + rect([960, 60], [10, 120], "#8A939C"), s, e)
-    bg("k_shelf", rect([1500, 260], [420, 20], "#B5835A", 8) + ell([1380, 220], [70, 70], CORAL) + rect([1500, 215], [70, 70], "#4A90E2", 14) +
+    if not night:
+        bg("k_shelf", rect([1500, 260], [420, 20], "#B5835A", 8) + ell([1380, 220], [70, 70], CORAL) + rect([1500, 215], [70, 70], "#4A90E2", 14) +
        ell([1620, 220], [70, 70], "#2BB673"), s, e)
 
 
@@ -168,7 +170,7 @@ bg("les_floor", rect([960, 980], [1920, 200], "#CDEBC0") + rect([960, 882], [192
 bg("les_board", rect([1230, 440], [1140, 640], "#2F6B57", 24) + rect([1230, 440], [1190, 690], "#B5835A", 36), CUT_LESSON, CUT_BATH2)
 set_bathroom("2", CUT_BATH2, CUT_DINNER)
 set_kitchen(CUT_DINNER, END, night=True)
-for l in L[-6:]:
+for l in L[-5:]:
     l["id"] += "_n"
 
 # ================================================================ INTRO (garden) props
@@ -262,7 +264,7 @@ when = [("eat", (960, 420), [group(ell([0, 0], [120, 40], "#FF8A00")), group(ell
 w_end = wt("lesson", "Number") - 0.2
 for k, (word, pos, items, label) in enumerate(when):
     t0 = wt("lesson", word)
-    L.append(prop(f"le_w{k}", items, pos, t0, w_end - t0, s=0.8, wiggle=6))
+    L.append(prop(f"le_w{k}", items, pos, t0, w_end - t0, s=1.05, wiggle=6))
     text(f"le_wl{k}", label, (pos[0], pos[1] + 100), 40, t0 + 0.1, w_end - t0 - 0.1, color=WHITE, stroke=None)
 text("le_achoo", "Achoo!", (1700, 560), 56, wt("lesson", "sneeze"), w_end - wt("lesson", "sneeze"), color=YELLOW, stroke=None)
 nums = [wt("lesson", "Number", k) for k in range(1, 6)] + [wt("lesson", "Now")]
@@ -288,11 +290,11 @@ for i in range(14):
     L.append(prop(f"by_conf{i}", [group(rect([0, 0], [26, 40], c, 6))], (x, -50), o + 0.1 + (i % 4) * 0.1, 4.0, spin=200,
                   extra={"position": {"keyframes": [{"time": 0, "value": [x, -50]}, {"time": 4.0, "value": [x + 60 * ((i % 3) - 1), 1150]}]}}))
 text("by_yay", "Clean hands!", (960, 130), 110, wt("bye", "Yay"), wt("bye", "Papa") - wt("bye", "Yay") - 0.1, color="#2BB673")
-SEATS = {"papa": 330, "mama": 640, "mokki": 960, "pia": 1260, "pip": 1530}
+SEATS = {"papa": 250, "mama": 610, "mokki": 960, "pia": 1300, "pip": 1620}
 for k, (cid, word, name, col) in enumerate([("papa", "Papa", "Papa", "#2A6FB0"), ("mama", "Mama", "Mama", "#D65A86"),
                                             ("pia", "Pia", "Pia", "#7B55C7"), ("pip", "Pip", "baby Pip", "#D19A12")]):
     t0 = wt("bye", word)
-    text(f"by_name{k}", name, (SEATS[cid], 330), 64, t0, END - t0, color=col)
+    text(f"by_name{k}", name, (SEATS[cid], 300), 64, t0, END - t0, color=col)
 L.append(prop("by_soap", [group(rect([0, 20], [120, 150], "#F3E6FF", 36) + rect([0, -80], [60, 16], "#9B59D0", 6) +
                                 [{"type": "stroke", "color": "#9B59D0", "width": 6}])], (1760, 600), wt("bye", "soap"), 2.0, wiggle=8))
 text("bye", "Bye-bye, friends!\nSee you tomorrow!", (960, 150), 90, wt("bye", "Bye-bye"), END - wt("bye", "Bye-bye"), color=CORAL)
@@ -324,8 +326,8 @@ for clip in ("intro", "mokki1", "mokki2", "lesson", "bye"):
 for a, _ in SONGS:
     mwords += [(a + s, a + e, 0) for s, e in SONG_WORDS]
 L += mokki_rig("mokki", mwords, pos_keys, scale=0.5, pos_expr=bounce, rot_expr=rot,
-               scale_keys=[{"time": 0, "value": [0.5, 0.5], "easing": "step"}, {"time": CUT_DINNER, "value": [0.42, 0.42], "easing": "step"},
-                           {"time": END - 0.8, "value": [0.42, 0.42], "easing": "ease_in"}, {"time": END, "value": [0, 0]}],
+               scale_keys=[{"time": 0, "value": [0.5, 0.5], "easing": "step"}, {"time": CUT_DINNER, "value": [0.36, 0.36], "easing": "step"},
+                           {"time": END - 0.8, "value": [0.36, 0.36], "easing": "ease_in"}, {"time": END, "value": [0, 0]}],
                closed=[(T["lesson"] + 2.8, T["lesson"] + 3.6)])
 
 # Pia in the garden (giggling, bouncing)
@@ -341,7 +343,7 @@ for clip in ("mama1", "mama2", "mama3"):
 L += place(family_rig("mama", mama_words, [{"time": 0, "value": [1620, 905]}], scale=0.5, prefix="mama_k"), ks, CUT_BATH1 - ks)
 # family at the dinner table (behind the table)
 ds = CUT_DINNER
-for cid, sc in [("papa", 0.42), ("mama", 0.42), ("pia", 0.42), ("pip", 0.42)]:
+for cid, sc in [("papa", 0.36), ("mama", 0.36), ("pia", 0.36), ("pip", 0.36)]:
     rot_wave = f"local r=value+4*math.sin(time*2+{len(cid)}); if time>{wave0 - ds:.2f} then r=r+10*math.sin(time*9+{len(cid)}) end; return r"
     L += place(family_rig(cid, [], [{"time": 0, "value": [SEATS[cid], 860]}], scale=sc, prefix=cid + "_d", rot_expr=rot_wave), ds, END - ds)
 table("d_table", CUT_DINNER, END, x=950, w=1600)
