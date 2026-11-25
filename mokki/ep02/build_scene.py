@@ -274,11 +274,11 @@ for k in range(5):
         L.extend(kit.rub_demo("le_rub_", s, e - s, "rub", BOARD, sc=0.85, card=False, count=True))
     else:
         L.extend(demos[k](f"le_d{k}_", s, e - s, BOARD, sc=0.85, card=False))
-L.extend(kid_text("le_turn", "Your turn!", (1230, 300), 90, nums[5], wt("lesson", "One") - nums[5] - 0.1,
+L.extend(kid_text("le_turn", "Your turn!", (1230, 300), 90, nums[5], wt("lesson", "One", 2) - nums[5] - 0.1,
                                                       color=YELLOW, stroke=None))
-L += kit.two_hands("le_turnh_", nums[5] + 0.3, wt("lesson", "One") - nums[5] - 0.4, (1230, 560), 0.75, rub="rub")
+L += kit.two_hands("le_turnh_", nums[5] + 0.3, wt("lesson", "One", 2) - nums[5] - 0.4, (1230, 560), 0.75, rub="rub")
 for n, (k, c) in enumerate([("One", CORAL), ("two", "#4A90E2"), ("three", "#2BB673")], 1):
-    t0 = wt("lesson", k)
+    t0 = wt("lesson", k, 2)
     text(f"le_cnt{n}", str(n), (930 + 300 * (n - 1), 480), 240, t0, o + 33.0 - t0, color=c)
 
 # ================================================================ BYE (family dinner)
