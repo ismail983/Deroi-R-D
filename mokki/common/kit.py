@@ -715,3 +715,118 @@ def dry_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
         if st < t0 + dur - 0.3:
             L.append(prop(f"{p}sp{i}", sparkle_icon(34 * sc, YELLOW), (cx + dx * sc, cy + dy * sc), st, t0 + dur - st, spin=160))
     return L
+
+
+# ------------------------------------------------------------------ bath-time props & demos
+def duck_icon():
+    return [group(ell([22, -48], [16, 16], NAVY)),
+            group([{"type": "polystar", "starType": "polygon", "points": 3, "position": [62, -34], "outerRadius": 22, "rotation": 90},
+                   {"type": "fill", "color": "#FF8A00"}]),
+            group(ell([20, -40], [80, 80], YELLOW) + [{"type": "stroke", "color": "#D19A12", "width": 5}]),
+            group([{"type": "ellipse", "position": [-10, 20], "size": [160, 90]}, {"type": "fill", "color": YELLOW},
+                   {"type": "stroke", "color": "#D19A12", "width": 5}])]
+
+
+def sponge_icon():
+    holes = [{"type": "ellipse", "position": [x, y], "size": [16, 12]} for x, y in ((-40, -15), (10, -25), (40, 10), (-15, 20), (35, -30))]
+    return [group(holes + [{"type": "fill", "color": "#E0B000"}]),
+            group(rect([0, 0], [150, 100], YELLOW, 26) + [{"type": "stroke", "color": "#D19A12", "width": 6}])]
+
+
+def tub_back_icon(w=900):
+    return [group(ell([0, 0], [w, 120], "#BFE6F7") + [{"type": "stroke", "color": "#8FCDEB", "width": 8}])]
+
+
+def tub_front_icon(w=900, h=300):
+    feet = [group(ell([x, h / 2 + 10], [70, 50], "#C9D1D9")) for x in (-w / 2 + 110, w / 2 - 110)]
+    foam = [group([{"type": "ellipse", "position": [x, -10], "size": [r, r]} for x, r in
+                   ((-w / 2 + 80, 110), (-w / 4, 140), (0, 120), (w / 4, 150), (w / 2 - 90, 110), (-w / 8, 100), (w / 8 + 40, 100))] +
+                  [{"type": "fill", "color": WHITE}, {"type": "stroke", "color": "#D6EEF8", "width": 5}])]
+    return foam + [group(rect([0, h / 2 - 20], [w, h], WHITE, 120) + [{"type": "stroke", "color": "#8FCDEB", "width": 12}])] + feet
+
+
+def body_part_icon(part):
+    sk, ln = SKIN, SKIN_LINE
+    if part == "face":
+        return [group(ell([-40, -20], [26, 26], NAVY) + ell([40, -20], [26, 26], NAVY)),
+                group([{"type": "path", "closed": False, "vertices": [{"point": [-45, 40], "outTangent": [20, 30]}, {"point": [45, 40], "inTangent": [-20, 30]}]},
+                       {"type": "stroke", "color": NAVY, "width": 10, "lineCap": "round"}]),
+                group(ell([-75, 25], [40, 24], PINK) + ell([75, 25], [40, 24], PINK)),
+                group(ell([0, 0], [260, 260], sk) + [{"type": "stroke", "color": ln, "width": 8}])]
+    if part == "ears":
+        ear = lambda x, s: group([{"type": "ellipse", "position": [x, 0], "size": [110, 170]}, {"type": "fill", "color": sk},
+                                  {"type": "stroke", "color": ln, "width": 8}, ])
+        return [group(ell([-120, 0], [40, 80], "#F2B48C") + ell([120, 0], [40, 80], "#F2B48C")), ear(-120, 1), ear(120, -1)]
+    if part == "tummy":
+        return [group(ell([0, 20], [26, 20], "#E8A87C")), group(ell([0, 0], [280, 300], sk) + [{"type": "stroke", "color": ln, "width": 8}])]
+    if part == "arms":
+        return [group(rect([0, 0], [300, 90], sk, 45) + [{"type": "stroke", "color": ln, "width": 8}]),
+                group(ell([170, 0], [110, 110], sk) + [{"type": "stroke", "color": ln, "width": 8}])]
+    if part == "feet":
+        toes = [{"type": "ellipse", "position": [x, -105 + abs(x) * 0.25], "size": [34 - abs(x) * 0.06, 38]} for x in (-56, -26, 4, 32, 58)]
+        return [group(toes + [{"type": "fill", "color": sk}, {"type": "stroke", "color": ln, "width": 6}]),
+                group(ell([0, 10], [170, 230], sk) + [{"type": "stroke", "color": ln, "width": 8}])]
+    raise KeyError(part)
+
+
+def scrub_demo(p, t0, dur, part, center=(1190, 560), sc=1.0, card=True, wiggle_toes=False):
+    """A big body part; a sponge scrubs it; bubbles pile up."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card, border="#5BC0EB")
+    anim = {"scale": pop_scale(dur - 0.1, sc * 1.1)}
+    if part == "feet":
+        anim["rotation"] = {"keyframes": [{"time": 0, "value": 0}], "expression": "return 8*math.sin(time*10)"}
+    L.append(shape_layer(p + "part", body_part_icon(part), t0 + 0.1, dur - 0.1, (cx - 60 * sc, cy + 20 * sc), anim))
+    L.append(shape_layer(p + "sponge", sponge_icon(), t0 + 0.4, dur - 0.5, (cx + 40 * sc, cy), {
+        "scale": pop_scale(dur - 0.5, sc),
+        "rotation": {"keyframes": [{"time": 0, "value": -15}], "expression": "return value+10*math.sin(time*12)"},
+        "position": {"keyframes": [{"time": 0, "value": [cx + 40 * sc, cy]}],
+                     "expression": f"return value+Vec.v2({90 * sc:.0f}*math.sin(time*6), {60 * sc:.0f}*math.cos(time*9))"}}))
+    for i, (dx, dy, r) in enumerate([(-260, -150, 34), (240, -160, 30), (-280, 150, 30), (260, 150, 36), (0, -240, 28), (120, 230, 26)]):
+        st = t0 + 0.4 + i * 0.15
+        if st < t0 + dur - 0.3:
+            L.append(prop(f"{p}bub{i}", bubble_icon(r), (cx + dx * sc, cy + dy * sc), st, t0 + dur - st, s=sc * 1.3, bob=12))
+    return L
+
+
+def warm_check_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
+    """A grown-up hand tests the water: thermometer goes up to 'warm' (green tick), not 'hot' (red)."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card, border=CORAL)
+    L.append(shape_layer(p + "water", [group(rect([0, 0], [520, 160], "#BFE6F7", 40) + [{"type": "stroke", "color": "#8FCDEB", "width": 8}])],
+                         t0 + 0.1, dur - 0.1, (cx - 120 * sc, cy + 150 * sc), {"scale": pop_scale(dur - 0.1, sc)}))
+    L.append(shape_layer(p + "hand", hand_icon(1), t0 + 0.3, dur - 0.3, (cx - 120 * sc, cy - 20 * sc),
+                         {"scale": pop_scale(dur - 0.3, sc * 0.9), "rotation": {"keyframes": [{"time": 0, "value": 180}]},
+                          "position": {"keyframes": [{"time": 0, "value": [cx - 120 * sc, cy - 120 * sc], "easing": "ease_in_out"},
+                                                     {"time": 0.8, "value": [cx - 120 * sc, cy + 30 * sc]}]}}))
+    tx = cx + 330 * sc
+    L.append(shape_layer(p + "thermo", [group(ell([0, 110], [90, 90], CORAL)), group(rect([0, -20], [44, 260], WHITE, 22) +
+                                                                                    [{"type": "stroke", "color": "#9AA5B1", "width": 6}])],
+                         t0 + 0.2, dur - 0.2, (tx, cy - 40 * sc), {"scale": pop_scale(dur - 0.2, sc)}))
+    L.append(shape_layer(p + "mercury", [group(rect([0, -60], [22, 120], CORAL, 11))], t0 + 0.6, dur - 0.7, (tx, cy + 30 * sc),
+                         {"scale": {"keyframes": [{"time": 0, "value": [sc, 0.1 * sc], "easing": "ease_out"}, {"time": 1.2, "value": [sc, sc]}]}}))
+    t_ok = t0 + 1.6
+    if t_ok < t0 + dur - 0.4:
+        L.append(prop(p + "ok", [group([{"type": "path", "closed": False, "vertices": [{"point": [-40, 0]}, {"point": [-10, 30]}, {"point": [45, -35]}]},
+                                        {"type": "stroke", "color": WHITE, "width": 16, "lineCap": "round", "lineJoin": "round"}]),
+                                 group(ell([0, 0], [130, 130], "#2BB673"))], (tx + 130 * sc, cy - 160 * sc), t_ok, t0 + dur - t_ok, s=sc))
+        L += kid_text(p + "warm", "warm!", (tx, cy - 230 * sc), int(70 * sc), t_ok, t0 + dur - t_ok, color="#2BB673", letters=False)
+    return L
+
+
+def plug_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
+    """Pull the plug: the water swirls down the drain."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card, border="#5BC0EB")
+    L.append(shape_layer(p + "swirl", [group([{"type": "ellipse", "position": [0, 0], "size": [r, r * 0.6]} for r in (380, 280, 180, 90)] +
+                                             [{"type": "trim", "start": 0, "end": 0.75}, {"type": "stroke", "color": "#5BC0EB", "width": 14, "lineCap": "round"}]),
+                                       group(ell([0, 0], [440, 270], "#BFE6F7"))],
+                         t0 + 0.1, dur - 0.1, (cx, cy + 40 * sc),
+                         {"scale": {"keyframes": [{"time": 0, "value": [sc, sc], "easing": "ease_in"}, {"time": dur - 0.1, "value": [0.15 * sc, 0.15 * sc]}]},
+                          "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": "return 300*time"}}))
+    L.append(shape_layer(p + "plug", [group(rect([0, -70], [10, 120], "#9AA5B1", 4)), group(ell([0, 0], [70, 40], "#5A6470"))],
+                         t0 + 0.2, dur - 0.2, (cx + 160 * sc, cy - 120 * sc),
+                         {"scale": pop_scale(dur - 0.2, sc),
+                          "position": {"keyframes": [{"time": 0, "value": [cx, cy + 40 * sc], "easing": "ease_out"},
+                                                     {"time": 0.6, "value": [cx + 160 * sc, cy - 140 * sc]}]}}))
+    return L
