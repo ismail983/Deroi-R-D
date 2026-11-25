@@ -535,3 +535,183 @@ def family_rig(cid, words, pos_keys, scale=0.5, closed=(), pos_expr=None, rot_ex
                   "animations": {"opacity": {"keyframes": [{"time": 0, "value": 0}],
                                              "expression": blink + "if k>0.85 then return 1 end; return 0"}}})
     return L
+
+
+# ------------------------------------------------------------------ hand-washing demos (cartoon hands, water, soap, germs, towel)
+SKIN, SKIN_LINE, WATER, MUD = "#FFD7B5", "#C98E63", "#5BC0EB", "#8B5A2B"
+
+
+def hand_icon(side=1, color=SKIN, line=SKIN_LINE):
+    """A cartoon hand, fingers up, palm facing us. side=1 thumb on the left, -1 thumb on the right. ~260x330 px."""
+    fingers = [{"type": "rect", "position": [x, -95 + abs(x) * 0.25], "size": [44, 150], "roundness": 22} for x in (-66, -22, 22, 66)]
+    thumb = group([{"type": "rect", "position": [0, 0], "size": [46, 120], "roundness": 23}], pos=(-110 * side, 20), rot=-35 * side)
+    return [group(fingers + [{"type": "fill", "color": color}, {"type": "stroke", "color": line, "width": 6}]),
+            group([thumb, {"type": "fill", "color": color}, {"type": "stroke", "color": line, "width": 6}]),
+            group([{"type": "rect", "position": [0, 40], "size": [190, 170], "roundness": 70},
+                   {"type": "fill", "color": color}, {"type": "stroke", "color": line, "width": 6}])]
+
+
+def germ_icon(color="#7BC043"):
+    return [group([{"type": "ellipse", "position": [-13, -4], "size": [16, 16]}, {"type": "ellipse", "position": [13, -4], "size": [16, 16]},
+                   {"type": "fill", "color": WHITE}]),
+            group([{"type": "ellipse", "position": [-13, -2], "size": [7, 7]}, {"type": "ellipse", "position": [13, -2], "size": [7, 7]},
+                   {"type": "fill", "color": NAVY}]),
+            group([{"type": "polystar", "starType": "star", "points": 10, "position": [0, 0], "outerRadius": 46, "innerRadius": 34,
+                    "outerRoundness": 0.4}, {"type": "fill", "color": color}, {"type": "stroke", "color": "#4E8A1E", "width": 4}])]
+
+
+def bubble_icon(r=30):
+    return [group(ell([-r * .35, -r * .35], [r * .5, r * .35], WHITE)),
+            group([{"type": "ellipse", "position": [0, 0], "size": [2 * r, 2 * r]}, {"type": "fill", "color": "#E8F7FF", "opacity": 0.7},
+                   {"type": "stroke", "color": "#8FCDEB", "width": 4}])]
+
+
+def two_hands(p, t0, dur, center, sc, rub=None, mud=False):
+    """Two hands side by side. rub: None | 'palms' | 'backs' | 'fingers' | 'thumbs' | 'rub' (rubbing motion)."""
+    cx, cy = center
+    L = []
+    gap = 125 * sc
+    for i, side in enumerate((1, -1)):
+        x0 = cx - gap * side
+        mot = None
+        if rub == "palms" or rub == "rub":
+            mot = f"return value+Vec.v2({55 * sc:.0f}*math.sin(time*9){'' if side > 0 else '*-1'}, {30 * sc:.0f}*math.cos(time*9))"
+        elif rub == "backs":
+            mot = f"return value+Vec.v2(0, {60 * sc:.0f}*math.sin(time*8){'' if side > 0 else '*-1'})"
+        elif rub == "fingers":
+            mot = f"return value+Vec.v2({35 * sc:.0f}*math.sin(time*12){'' if side > 0 else '*-1'}, 0)"
+        elif rub == "thumbs":
+            mot = f"return value+Vec.v2({20 * sc:.0f}*math.sin(time*14), {20 * sc:.0f}*math.cos(time*14))"
+        anim = {"scale": pop_scale(dur, sc)}
+        if mot:
+            anim["position"] = {"keyframes": [{"time": 0, "value": [x0, cy]}], "expression": mot}
+        if rub in ("palms", "rub"):
+            anim["rotation"] = {"keyframes": [{"time": 0, "value": 12 * side}]}
+        L.append(shape_layer(f"{p}hand{i}", hand_icon(side), t0, dur, (x0, cy), anim))
+        if mud:
+            spots = [group(ell([dx, dy], [r, r * 0.8], MUD)) for dx, dy, r in ((-40, 30, 50), (35, 70, 40), (10, -40, 34), (-55, -110, 26), (50, -60, 30))]
+            L.append(shape_layer(f"{p}mud{i}", spots, t0 + 0.3, dur - 0.3, (x0, cy), {"scale": pop_scale(dur - 0.3, sc),
+                                 **({"position": anim["position"]} if mot else {})}))
+    return L
+
+
+def hands_card(p, t0, dur, center=(1190, 560), sc=1.0, card=True, border="#5BC0EB"):
+    L = []
+    if card:
+        L.append(card_layer(p + "card", t0, dur, center, (1180 * sc, 680 * sc), border=border))
+    return L
+
+
+def water_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
+    """A tap pours water on two hands, splash drops."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card)
+    tap = (cx, cy - 250 * sc)
+    L.append(shape_layer(p + "tap", [group(rect([0, -40], [60, 50], "#B0B7BF", 10) + rect([-70, -70], [200, 50], "#C9D1D9", 25) +
+                                           rect([60, -10], [44, 70], "#C9D1D9", 14) + [{"type": "stroke", "color": "#8A939C", "width": 5}])],
+                         t0 + 0.1, dur - 0.1, (tap[0] - 60 * sc, tap[1]), {"scale": pop_scale(dur - 0.1, sc)}))
+    L.append(shape_layer(p + "stream", [group(rect([0, 0], [46, 300], WATER, 23)), group(rect([0, 0], [70, 300], "#BFE6F7", 35))],
+                         t0 + 0.5, dur - 0.6, (cx, cy - 70 * sc),
+                         {"scale": {"keyframes": [{"time": 0, "value": [sc, 0], "easing": "ease_out"}, {"time": 0.4, "value": [sc, sc]}],
+                                    "expression": "return Vec.v2(value.x*(1+0.08*math.sin(time*30)), value.y)"}}))
+    L += two_hands(p, t0 + 0.3, dur - 0.3, (cx, cy + 120 * sc), sc * 0.85, rub="rub")
+    for i in range(6):
+        off = i * 0.22
+        L.append(shape_layer(f"{p}drop{i}", [group([{"type": "polystar", "starType": "polygon", "points": 3, "position": [0, -16], "outerRadius": 18},
+                                                   {"type": "ellipse", "position": [0, 0], "size": [32, 32]}, {"type": "fill", "color": WATER}])],
+                             t0 + 0.8, dur - 0.8, (cx, cy),
+                             {"scale": {"keyframes": [{"time": 0, "value": [sc, sc]}]},
+                              "position": {"keyframes": [{"time": 0, "value": [cx, cy]}],
+                                           "expression": f"local t=(time+{off:.2f})%1.3; local d={-1 if i % 2 else 1}; "
+                                                         f"return Vec.v2({cx:.0f}+d*{(120 + 30 * i) * sc:.0f}*t/1.3, {cy + 60 * sc:.0f}-{150 * sc:.0f}*math.sin(math.pi*t/1.3)+{150 * sc:.0f}*t)"}}))
+    return L
+
+
+def soap_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
+    """Soap pump presses twice, soap drops on the hands, bubbles grow."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card, border=PINK)
+    pump = (cx + 300 * sc, cy - 60 * sc)
+    L.append(shape_layer(p + "pump", [group(rect([0, -150], [80, 22], "#9B59D0", 8) + rect([-50, -140], [80, 18], "#9B59D0", 8) +
+                                            rect([0, -110], [26, 60], "#B0B7BF", 6)),
+                                      group(rect([0, 20], [170, 220], "#F3E6FF", 50) + rect([0, 40], [170, 70], "#C9A2E8", 0) +
+                                            [{"type": "stroke", "color": "#9B59D0", "width": 6}])],
+                         t0 + 0.1, dur - 0.1, pump, {"scale": pop_scale(dur - 0.1, sc)}))
+    # the pump head pressing (a small cap that moves down twice)
+    L.append(shape_layer(p + "press", [group(rect([0, 0], [90, 24], "#7B3FB4", 10))], t0 + 0.5, dur - 0.6, (pump[0], pump[1] - 170 * sc),
+                         {"scale": {"keyframes": [{"time": 0, "value": [sc, sc]}]},
+                          "position": {"keyframes": [{"time": 0, "value": [pump[0], pump[1] - 170 * sc], "easing": "ease_in_out"},
+                                                     {"time": 0.3, "value": [pump[0], pump[1] - 140 * sc], "easing": "ease_in_out"},
+                                                     {"time": 0.6, "value": [pump[0], pump[1] - 170 * sc], "easing": "ease_in_out"},
+                                                     {"time": 0.9, "value": [pump[0], pump[1] - 140 * sc], "easing": "ease_in_out"},
+                                                     {"time": 1.2, "value": [pump[0], pump[1] - 170 * sc]}]}}))
+    L += two_hands(p, t0 + 0.2, dur - 0.2, (cx - 140 * sc, cy + 110 * sc), sc * 0.85)
+    # soap blob falls on the hands
+    L.append(shape_layer(p + "blob", paste_blob_icon(34), t0 + 0.8, dur - 0.8, (pump[0] - 90 * sc, pump[1] - 140 * sc),
+                         {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.3, "value": [sc, sc]}]},
+                          "position": {"keyframes": [{"time": 0, "value": [pump[0] - 90 * sc, pump[1] - 140 * sc], "easing": "ease_in"},
+                                                     {"time": 0.9, "value": [cx - 140 * sc, cy + 60 * sc]}]}}))
+    for i, (dx, dy, r) in enumerate([(-260, -40, 30), (-80, -60, 40), (-180, -150, 26), (20, 20, 34), (-320, 90, 28), (-40, 140, 30), (60, -120, 22)]):
+        st = t0 + 1.6 + i * 0.18
+        if st < t0 + dur - 0.4:
+            L.append(prop(f"{p}bub{i}", bubble_icon(r), (cx + (dx - 60) * sc, cy + dy * sc), st, t0 + dur - st, s=sc * 1.3, bob=10))
+    return L
+
+
+def rub_demo(p, t0, dur, mode="rub", center=(1190, 560), sc=1.0, card=True, germs_at=None, count=False):
+    """Hands rubbing with bubbles. germs_at: time the germs run away (germs shown before it). count: 1..20 counter."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card, border="#2BB673")
+    L += two_hands(p, t0 + 0.1, dur - 0.1, (cx, cy + 60 * sc), sc * 0.95, rub=mode)
+    for i, (dx, dy, r) in enumerate([(-300, -120, 34), (280, -140, 28), (-250, 160, 30), (300, 120, 36), (0, -230, 26), (-120, 230, 24), (150, 220, 28)]):
+        st = t0 + 0.3 + i * 0.12
+        L.append(prop(f"{p}bub{i}", bubble_icon(r), (cx + dx * sc, cy + dy * sc), st, t0 + dur - st, s=sc * 1.3, bob=12))
+    if germs_at is not None:
+        for i, (dx, dy) in enumerate([(-80, -60), (90, 20), (-20, 110), (60, -130)]):
+            st = t0 + 0.2 + i * 0.1
+            gone = germs_at - st
+            L.append(shape_layer(f"{p}germ{i}", germ_icon(), st, min(gone + 1.2, t0 + dur - st), (cx + dx * sc, cy + dy * sc),
+                                 {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.3, "value": [0.9 * sc, 0.9 * sc]}]},
+                                  "position": {"keyframes": [{"time": 0, "value": [cx + dx * sc, cy + dy * sc]},
+                                                             {"time": gone, "value": [cx + dx * sc, cy + dy * sc], "easing": "ease_in"},
+                                                             {"time": gone + 1.1, "value": [cx + dx * 6 * sc, cy - 900 * sc]}],
+                                               "expression": f"return value+Vec.v2(8*math.sin(time*11+{i}),6*math.cos(time*9+{i}))"},
+                                  "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": "return 15*math.sin(time*8)"}}))
+    if count:
+        n = 20
+        step = (dur - 0.6) / n
+        for k in range(1, n + 1):
+            L += kid_text(f"{p}cnt{k}", str(k), (cx + 420 * sc, cy - 220 * sc), int(130 * sc), t0 + 0.3 + (k - 1) * step, step,
+                          color=["#F0506E", "#4A90E2", "#2BB673", "#FF8A00", "#9B59D0"][k % 5], letters=False, pop=False)
+    return L
+
+
+def rinse_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
+    """Water washes the bubbles away."""
+    cx, cy = center
+    L = water_demo(p, t0, dur, center, sc, card)
+    for i, (dx, dy, r) in enumerate([(-120, 40, 30), (110, 60, 26), (-40, 160, 28), (60, -20, 24)]):
+        L.append(shape_layer(f"{p}rb{i}", bubble_icon(r), t0 + 0.3, dur - 0.3, (cx + dx * sc, cy + dy * sc),
+                             {"scale": {"keyframes": [{"time": 0, "value": [sc, sc]}, {"time": 0.6 + 0.2 * i, "value": [sc, sc], "easing": "ease_in"},
+                                                      {"time": 1.2 + 0.2 * i, "value": [0, 0]}]},
+                              "position": {"keyframes": [{"time": 0, "value": [cx + dx * sc, cy + dy * sc], "easing": "ease_in"},
+                                                         {"time": 1.2 + 0.2 * i, "value": [cx + dx * sc, cy + (dy + 260) * sc]}]}}))
+    return L
+
+
+def dry_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
+    """A striped towel swooshes across the hands; sparkles."""
+    cx, cy = center
+    L = hands_card(p, t0, dur, center, sc, card, border=YELLOW)
+    L += two_hands(p, t0 + 0.1, dur - 0.1, (cx, cy + 60 * sc), sc * 0.95)
+    towel = [group(rect([0, -70], [380, 26], "#FFFFFF", 0) + rect([0, 70], [380, 26], "#FFFFFF", 0)),
+             group(rect([0, 0], [380, 230], "#FF8A9A", 30) + [{"type": "stroke", "color": "#E05A6E", "width": 8}])]
+    L.append(shape_layer(p + "towel", towel, t0 + 0.4, dur - 0.5, (cx, cy + 40 * sc),
+                         {"scale": pop_scale(dur - 0.5, sc),
+                          "position": {"keyframes": [{"time": 0, "value": [cx, cy + 40 * sc]}],
+                                       "expression": f"return value+Vec.v2({230 * sc:.0f}*math.sin(time*5), {25 * sc:.0f}*math.sin(time*10))"}}))
+    for i, (dx, dy) in enumerate([(-330, -180), (330, -160), (-300, 200), (320, 190), (0, -250)]):
+        st = t0 + 1.0 + i * 0.15
+        if st < t0 + dur - 0.3:
+            L.append(prop(f"{p}sp{i}", sparkle_icon(34 * sc, YELLOW), (cx + dx * sc, cy + dy * sc), st, t0 + dur - st, spin=160))
+    return L
