@@ -543,7 +543,7 @@ SKIN, SKIN_LINE, WATER, MUD = "#FFD7B5", "#C98E63", "#5BC0EB", "#8B5A2B"
 
 def hand_icon(side=1, color=SKIN, line=SKIN_LINE):
     """A cartoon hand, fingers up, palm facing us. side=1 thumb on the left, -1 thumb on the right. ~260x330 px."""
-    fingers = [{"type": "rect", "position": [x, -95 + abs(x) * 0.25], "size": [44, 150], "roundness": 22} for x in (-66, -22, 22, 66)]
+    fingers = [{"type": "rect", "position": [x, -95 + abs(x) * 0.3], "size": [40, 150], "roundness": 20} for x in (-72, -24, 24, 72)]
     thumb = group([{"type": "rect", "position": [0, 0], "size": [46, 120], "roundness": 23}], pos=(-110 * side, 20), rot=-35 * side)
     return [group(fingers + [{"type": "fill", "color": color}, {"type": "stroke", "color": line, "width": 6}]),
             group([thumb, {"type": "fill", "color": color}, {"type": "stroke", "color": line, "width": 6}]),
@@ -570,7 +570,7 @@ def two_hands(p, t0, dur, center, sc, rub=None, mud=False):
     """Two hands side by side. rub: None | 'palms' | 'backs' | 'fingers' | 'thumbs' | 'rub' (rubbing motion)."""
     cx, cy = center
     L = []
-    gap = 125 * sc
+    gap = 135 * sc
     for i, side in enumerate((1, -1)):
         x0 = cx - gap * side
         mot = None
@@ -606,7 +606,7 @@ def water_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
     """A tap pours water on two hands, splash drops."""
     cx, cy = center
     L = hands_card(p, t0, dur, center, sc, card)
-    tap = (cx, cy - 250 * sc)
+    tap = (cx, cy - 215 * sc)
     L.append(shape_layer(p + "tap", [group(rect([0, -40], [60, 50], "#B0B7BF", 10) + rect([-70, -70], [200, 50], "#C9D1D9", 25) +
                                            rect([60, -10], [44, 70], "#C9D1D9", 14) + [{"type": "stroke", "color": "#8A939C", "width": 5}])],
                          t0 + 0.1, dur - 0.1, (tap[0] - 60 * sc, tap[1]), {"scale": pop_scale(dur - 0.1, sc)}))
@@ -614,7 +614,7 @@ def water_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
                          t0 + 0.5, dur - 0.6, (cx, cy - 70 * sc),
                          {"scale": {"keyframes": [{"time": 0, "value": [sc, 0], "easing": "ease_out"}, {"time": 0.4, "value": [sc, sc]}],
                                     "expression": "return Vec.v2(value.x*(1+0.08*math.sin(time*30)), value.y)"}}))
-    L += two_hands(p, t0 + 0.3, dur - 0.3, (cx, cy + 120 * sc), sc * 0.85, rub="rub")
+    L += two_hands(p, t0 + 0.3, dur - 0.3, (cx, cy + 150 * sc), sc * 1.15, rub="rub")
     for i in range(6):
         off = i * 0.22
         L.append(shape_layer(f"{p}drop{i}", [group([{"type": "polystar", "starType": "polygon", "points": 3, "position": [0, -16], "outerRadius": 18},
@@ -645,7 +645,7 @@ def soap_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
                                                      {"time": 0.6, "value": [pump[0], pump[1] - 170 * sc], "easing": "ease_in_out"},
                                                      {"time": 0.9, "value": [pump[0], pump[1] - 140 * sc], "easing": "ease_in_out"},
                                                      {"time": 1.2, "value": [pump[0], pump[1] - 170 * sc]}]}}))
-    L += two_hands(p, t0 + 0.2, dur - 0.2, (cx - 140 * sc, cy + 110 * sc), sc * 0.85)
+    L += two_hands(p, t0 + 0.2, dur - 0.2, (cx - 160 * sc, cy + 120 * sc), sc * 1.15)
     # soap blob falls on the hands
     L.append(shape_layer(p + "blob", paste_blob_icon(34), t0 + 0.8, dur - 0.8, (pump[0] - 90 * sc, pump[1] - 140 * sc),
                          {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.3, "value": [sc, sc]}]},
@@ -662,7 +662,7 @@ def rub_demo(p, t0, dur, mode="rub", center=(1190, 560), sc=1.0, card=True, germ
     """Hands rubbing with bubbles. germs_at: time the germs run away (germs shown before it). count: 1..20 counter."""
     cx, cy = center
     L = hands_card(p, t0, dur, center, sc, card, border="#2BB673")
-    L += two_hands(p, t0 + 0.1, dur - 0.1, (cx, cy + 60 * sc), sc * 0.95, rub=mode)
+    L += two_hands(p, t0 + 0.1, dur - 0.1, (cx, cy + 70 * sc), sc * 1.3, rub=mode)
     for i, (dx, dy, r) in enumerate([(-300, -120, 34), (280, -140, 28), (-250, 160, 30), (300, 120, 36), (0, -230, 26), (-120, 230, 24), (150, 220, 28)]):
         st = t0 + 0.3 + i * 0.12
         L.append(prop(f"{p}bub{i}", bubble_icon(r), (cx + dx * sc, cy + dy * sc), st, t0 + dur - st, s=sc * 1.3, bob=12))
@@ -703,7 +703,7 @@ def dry_demo(p, t0, dur, center=(1190, 560), sc=1.0, card=True):
     """A striped towel swooshes across the hands; sparkles."""
     cx, cy = center
     L = hands_card(p, t0, dur, center, sc, card, border=YELLOW)
-    L += two_hands(p, t0 + 0.1, dur - 0.1, (cx, cy + 60 * sc), sc * 0.95)
+    L += two_hands(p, t0 + 0.1, dur - 0.1, (cx, cy + 70 * sc), sc * 1.3)
     towel = [group(rect([0, -70], [380, 26], "#FFFFFF", 0) + rect([0, 70], [380, 26], "#FFFFFF", 0)),
              group(rect([0, 0], [380, 230], "#FF8A9A", 30) + [{"type": "stroke", "color": "#E05A6E", "width": 8}])]
     L.append(shape_layer(p + "towel", towel, t0 + 0.4, dur - 0.5, (cx, cy + 40 * sc),
