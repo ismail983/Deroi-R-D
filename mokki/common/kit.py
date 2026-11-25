@@ -773,12 +773,12 @@ def scrub_demo(p, t0, dur, part, center=(1190, 560), sc=1.0, card=True, wiggle_t
     """A big body part; a sponge scrubs it; bubbles pile up."""
     cx, cy = center
     L = hands_card(p, t0, dur, center, sc, card, border="#5BC0EB")
-    anim = {"scale": pop_scale(dur - 0.1, sc * 1.1)}
+    anim = {"scale": pop_scale(dur - 0.1, sc * 1.45)}
     if part == "feet":
         anim["rotation"] = {"keyframes": [{"time": 0, "value": 0}], "expression": "return 8*math.sin(time*10)"}
     L.append(shape_layer(p + "part", body_part_icon(part), t0 + 0.1, dur - 0.1, (cx - 60 * sc, cy + 20 * sc), anim))
-    L.append(shape_layer(p + "sponge", sponge_icon(), t0 + 0.4, dur - 0.5, (cx + 40 * sc, cy), {
-        "scale": pop_scale(dur - 0.5, sc),
+    L.append(shape_layer(p + "sponge", sponge_icon(), t0 + 0.2, dur - 0.3, (cx + 40 * sc, cy), {
+        "scale": pop_scale(dur - 0.3, sc * 1.2),
         "rotation": {"keyframes": [{"time": 0, "value": -15}], "expression": "return value+10*math.sin(time*12)"},
         "position": {"keyframes": [{"time": 0, "value": [cx + 40 * sc, cy]}],
                      "expression": f"return value+Vec.v2({90 * sc:.0f}*math.sin(time*6), {60 * sc:.0f}*math.cos(time*9))"}}))

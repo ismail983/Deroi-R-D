@@ -79,6 +79,7 @@ END = 265.5
 SONGS = [(T_SONG1, T_SONG1 + SONG_LEN), (T_SONG2, T_SONG2 + SONG_LEN)]
 KID_COLORS = ["#F0506E", "#2BB673", "#4A90E2", "#FF8A00", "#9B59D0"]
 TUB = (390, 905)
+MOKKI_TUB_X, PIP_TUB_X = 440, 170
 
 
 def wt(clip, word, n=1):
@@ -125,7 +126,7 @@ def bathroom(sfx, s, e, water_t=None):
                                for y in range(60, 760, 120)] + [{"type": "fill", "color": "#D3EEFB"}])], s, e)
     bg("b_floor" + sfx, rect([960, 980], [1920, 200], "#9ED8FF") + rect([960, 882], [1920, 8], "#7EC8F5"), s, e)
     bg("b_tap" + sfx, rect([140, 640], [90, 40], "#C9D1D9", 16) + rect([110, 680], [36, 60], "#C9D1D9", 12), s, e)
-    bg("b_tubback" + sfx, [group([tb], pos=TUB) for tb in kit.tub_back_icon(640)], s, e)
+    bg("b_tubback" + sfx, [group([tb], pos=TUB) for tb in kit.tub_back_icon(720)], s, e)
 
 
 bathroom("1", CUT_BATH, CUT_LESSON)
@@ -197,7 +198,7 @@ for i, (x, y) in enumerate([(330, 600), (800, 560), (640, 1050), (420, 980)]):
               "animations": {"scale": {"keyframes": [{"time": 0, "value": [0, 0], "easing": POP}, {"time": 0.3, "value": [1, 1]}]}}})
 
 # ================================================================ SONG
-C = (1190, 520)
+C = (1230, 520)
 
 
 def song_pass(si, a):
@@ -205,7 +206,7 @@ def song_pass(si, a):
     text(p + "head", "Bath time with Mokki!" if si == 0 else "Now YOU splash with Mokki!", (960, 120), 90, a + 0.3, 4.2)
     for li, (s, e, line) in enumerate(LYRICS):
         text(f"{p}ly{li}", line, (1100, 110), 70, a + s, e - s, pop=False)
-    L.extend(kit.warm_check_demo(p + "warm_", a + 4.7, 2.4, C))
+    L.extend(kit.warm_check_demo(p + "warm_", a + 4.7, 2.4, C, sc=0.9))
     for i in range(10):
         x, y = 650 + (i * 137) % 1200, 300 + (i * 97) % 500
         L.append(prop(f"{p}storm{i}", kit.bubble_icon(30 + (i % 4) * 10), (x, y), a + 7.2 + 0.12 * i, 2.2, s=1.4, bob=15))
@@ -218,12 +219,12 @@ def song_pass(si, a):
                       (TUB[0] - 250 + 70 * k, TUB[1] - 230 - 40 * (k % 3)), a + 12.4 + 0.08 * k, 1.6, s=1.2, bob=-30))
     text(p + "splashtxt", "Splash!", (1190, 520), 150, a + 13.1, 1.4, color="#4A90E2", wobble=True)
     for c0, sub in [(23.9, ""), (52.7, "b")]:
-        L.extend(kit.scrub_demo(f"{p}ch{sub}face_", a + c0, 4.8, "face", C))
-        L.extend(kit.scrub_demo(f"{p}ch{sub}feet_", a + c0 + 4.85, 4.6, "feet", C))
+        L.extend(kit.scrub_demo(f"{p}ch{sub}face_", a + c0, 4.8, "face", C, sc=0.9))
+        L.extend(kit.scrub_demo(f"{p}ch{sub}feet_", a + c0 + 4.85, 4.6, "feet", C, sc=0.9))
     for k, (s, e, part) in enumerate([(33.55, 34.8, "face"), (34.8, 35.95, "ears"), (36.0, 38.35, "tummy"), (38.4, 39.55, "arms"), (39.55, 43.3, "feet")]):
-        L.extend(kit.scrub_demo(f"{p}v2_{k}_", a + s, e - s, part, C))
-    L.extend(kit.plug_demo(p + "plug_", a + 71.9, 2.4, C))
-    L.extend(kit.dry_demo(p + "towel_", a + 74.35, 2.3, C))
+        L.extend(kit.scrub_demo(f"{p}v2_{k}_", a + s, e - s, part, C, sc=0.9))
+    L.extend(kit.plug_demo(p + "plug_", a + 71.9, 2.4, C, sc=0.9))
+    L.extend(kit.dry_demo(p + "towel_", a + 74.35, 2.3, C, sc=0.9))
     text(p + "squeaky", "Squeaky clean!", (1190, 520), 130, a + 76.8, 9.4, color="#2BB673", wobble=True)
     for i, (x, y) in enumerate([(760, 320), (1640, 300), (800, 760), (1600, 760), (1190, 260), (1190, 820)]):
         L.append(prop(f"{p}sq{i}", sparkle_icon(55, YELLOW), (x, y), a + 76.8 + 0.1 * i, 9.2, spin=200))
@@ -266,7 +267,7 @@ for k in range(4):
 a0, a1 = wt("lesson", "remember"), wt("lesson", "Now")
 text("le_never", "Never alone in the bath!", (1230, 260), 64, a0, wt("lesson", "Always") - a0, color=YELLOW, stroke=None)
 text("le_always", "Always with a grown-up!", (1230, 260), 64, wt("lesson", "Always"), a1 - wt("lesson", "Always") - 0.1, color="#9EF07A", stroke=None)
-L.append(prop("le_tub", kit.tub_front_icon(420, 180), (1080, 560), a0 + 0.3, a1 - a0 - 0.4, s=0.9))
+L.append(prop("le_tub", kit.duck_icon(), (1060, 540), a0 + 0.3, a1 - a0 - 0.4, s=1.4, wiggle=8))
 L.append(prop("le_heart", heart_icon(60), (1430, 520), wt("lesson", "Always"), a1 - wt("lesson", "Always") - 0.1, bob=12))
 L.append(prop("le_hand", kit.hand_icon(-1), (1430, 680), wt("lesson", "Always") + 0.2, a1 - wt("lesson", "Always") - 0.3, s=0.6, wiggle=10))
 text("le_turn", "Your turn!", (1230, 300), 90, a1, wt("lesson", "One", 2) - a1 - 0.1, color=YELLOW, stroke=None)
@@ -293,7 +294,7 @@ L.append({"id": "towelwrap", "parentId": "mokki", "start": snap(CUT_NIGHT), "dur
                                                                                                     [{"type": "stroke", "color": "#E05A6E", "width": 14}])]}})
 
 # ================================================================ CHARACTERS
-POS = {"park": [520, 905], "bath_stand": [820, 905], "tub": [TUB[0] - 90, 905], "lesson": [430, 890], "night": [950, 905]}
+POS = {"park": [520, 905], "bath_stand": [820, 905], "tub": [MOKKI_TUB_X, 905], "lesson": [430, 890], "night": [820, 905]}
 roll0 = wt("intro", "rolled")
 pos_keys = [{"time": 0, "value": POS["park"], "easing": "step"},
             {"time": wt("intro", "ran"), "value": POS["park"], "easing": "ease_in_out"},
@@ -329,17 +330,17 @@ pw = []
 for clip in ("papa1", "papa2", "papa3"):
     pw += words_from_transcript(W[clip], T[clip] - bs)
 L += place(family_rig("papa", pw, [{"time": 0, "value": [1560, 905]}], scale=0.5, prefix="papa_b"), bs, T_SONG1 + 0.5 - bs)
-L += place(family_rig("papa", [], [{"time": 0, "value": [1250, 905]}], scale=0.5, prefix="papa_n",
+L += place(family_rig("papa", [], [{"time": 0, "value": [1420, 905]}], scale=0.5, prefix="papa_n",
                       rot_expr=f"local r=value+3*math.sin(time*2); if time>{wave0 - CUT_NIGHT:.2f} then r=r+10*math.sin(time*9) end; return r"),
            CUT_NIGHT, END - CUT_NIGHT)
 # Pip in the tub (from when Mokki asks for him)
 pip0 = wt("mokki2", "Pip")
 pipbob = "return value+Vec.v2(0,-14*math.abs(math.sin(time*2.6)))"
-L += place(family_rig("pip", [], [{"time": 0, "value": [TUB[0] + 150, 905]}], scale=0.5, prefix="pip_b1", pos_expr=pipbob), pip0, CUT_LESSON - pip0)
-L += place(family_rig("pip", [], [{"time": 0, "value": [TUB[0] + 150, 905]}], scale=0.5, prefix="pip_b2", pos_expr=pipbob), CUT_BATH2, CUT_NIGHT - CUT_BATH2)
+L += place(family_rig("pip", [], [{"time": 0, "value": [PIP_TUB_X, 905]}], scale=0.5, prefix="pip_b1", pos_expr=pipbob), pip0, CUT_LESSON - pip0)
+L += place(family_rig("pip", [], [{"time": 0, "value": [PIP_TUB_X, 905]}], scale=0.5, prefix="pip_b2", pos_expr=pipbob), CUT_BATH2, CUT_NIGHT - CUT_BATH2)
 # tub front (over Mokki & Pip)
 for sfx, s, e in (("1", CUT_BATH, CUT_LESSON), ("2", CUT_BATH2, CUT_NIGHT)):
-    bg("tubfront" + sfx, [group([tb], pos=(TUB[0], TUB[1] + 20)) for tb in kit.tub_front_icon(640, 250)], s, e)
+    bg("tubfront" + sfx, [group([tb], pos=(TUB[0], TUB[1] + 20)) for tb in kit.tub_front_icon(720, 250)], s, e)
 
 # ================================================================ wipes + audio
 for i, cut in enumerate([CUT_BATH, CUT_LESSON, CUT_BATH2, CUT_NIGHT]):
