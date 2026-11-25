@@ -125,7 +125,7 @@ def bathroom(sfx, s, e, water_t=None):
                                for y in range(60, 760, 120)] + [{"type": "fill", "color": "#D3EEFB"}])], s, e)
     bg("b_floor" + sfx, rect([960, 980], [1920, 200], "#9ED8FF") + rect([960, 882], [1920, 8], "#7EC8F5"), s, e)
     bg("b_tap" + sfx, rect([140, 640], [90, 40], "#C9D1D9", 16) + rect([110, 680], [36, 60], "#C9D1D9", 12), s, e)
-    bg("b_tubback" + sfx, [group(tb, pos=TUB) for tb in kit.tub_back_icon(640)], s, e)
+    bg("b_tubback" + sfx, [group([tb], pos=TUB) for tb in kit.tub_back_icon(640)], s, e)
 
 
 bathroom("1", CUT_BATH, CUT_LESSON)
@@ -266,11 +266,11 @@ for k in range(4):
 a0, a1 = wt("lesson", "remember"), wt("lesson", "Now")
 text("le_never", "Never alone in the bath!", (1230, 260), 64, a0, wt("lesson", "Always") - a0, color=YELLOW, stroke=None)
 text("le_always", "Always with a grown-up!", (1230, 260), 64, wt("lesson", "Always"), a1 - wt("lesson", "Always") - 0.1, color="#9EF07A", stroke=None)
-L.append(prop("le_tub", [group(tb) for tb in kit.tub_front_icon(420, 180)], (1080, 560), a0 + 0.3, a1 - a0 - 0.4, s=0.9))
+L.append(prop("le_tub", kit.tub_front_icon(420, 180), (1080, 560), a0 + 0.3, a1 - a0 - 0.4, s=0.9))
 L.append(prop("le_heart", heart_icon(60), (1430, 520), wt("lesson", "Always"), a1 - wt("lesson", "Always") - 0.1, bob=12))
 L.append(prop("le_hand", kit.hand_icon(-1), (1430, 680), wt("lesson", "Always") + 0.2, a1 - wt("lesson", "Always") - 0.3, s=0.6, wiggle=10))
-text("le_turn", "Your turn!", (1230, 300), 90, a1, wt("lesson", "One") - a1 - 0.1, color=YELLOW, stroke=None)
-L.append(prop("le_duck", kit.duck_icon(), (1230, 560), a1 + 0.2, wt("lesson", "One") - a1 - 0.3, s=1.4, wiggle=10))
+text("le_turn", "Your turn!", (1230, 300), 90, a1, wt("lesson", "One", 2) - a1 - 0.1, color=YELLOW, stroke=None)
+L.append(prop("le_duck", kit.duck_icon(), (1230, 560), a1 + 0.2, wt("lesson", "One", 2) - a1 - 0.3, s=1.4, wiggle=10))
 for n, (k, c) in enumerate([("One", CORAL), ("two", "#4A90E2"), ("three", "#2BB673")], 1):
     t0 = wt("lesson", k, 2)
     text(f"le_cnt{n}", str(n), (930 + 300 * (n - 1), 480), 240, t0, o + 31.3 - t0, color=c)
@@ -339,7 +339,7 @@ L += place(family_rig("pip", [], [{"time": 0, "value": [TUB[0] + 150, 905]}], sc
 L += place(family_rig("pip", [], [{"time": 0, "value": [TUB[0] + 150, 905]}], scale=0.5, prefix="pip_b2", pos_expr=pipbob), CUT_BATH2, CUT_NIGHT - CUT_BATH2)
 # tub front (over Mokki & Pip)
 for sfx, s, e in (("1", CUT_BATH, CUT_LESSON), ("2", CUT_BATH2, CUT_NIGHT)):
-    bg("tubfront" + sfx, [group(tb, pos=(TUB[0], TUB[1] + 20)) for tb in kit.tub_front_icon(640, 250)], s, e)
+    bg("tubfront" + sfx, [group([tb], pos=(TUB[0], TUB[1] + 20)) for tb in kit.tub_front_icon(640, 250)], s, e)
 
 # ================================================================ wipes + audio
 for i, cut in enumerate([CUT_BATH, CUT_LESSON, CUT_BATH2, CUT_NIGHT]):
