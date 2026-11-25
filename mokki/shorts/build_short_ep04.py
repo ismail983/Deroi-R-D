@@ -63,7 +63,7 @@ for i, v in enumerate(VEG_ORDER):
     x = 120 + i * 168
     L.append({"id": f"up{i}", "start": snap(t_sky + 0.1 * i), "duration": snap(TB - t_sky - 0.1 * i), "timeMode": "layer",
               "content": {"kind": "shape", "items": vg.VEG[v]()},
-              "animations": {"position": {"keyframes": [{"time": 0, "value": [x, 1400], "easing": "ease_out"}, {"time": TB - t_sky - 0.1 * i, "value": [x, 300]}]},
+              "animations": {"position": {"keyframes": [{"time": 0, "value": [x, 1400], "easing": "ease_out"}, {"time": TB - t_sky - 0.1 * i, "value": [x, 600]}]},
                              "scale": {"keyframes": [{"time": 0, "value": [0.55, 0.55]}]},
                              "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": "return 15*math.sin(time*6)"}}})
 L += vg.rainbow_plate_demo("oplate_", song_t(77.45), 2.55, C, sc=0.8)

@@ -238,7 +238,7 @@ def sky_demo(p, t0, dur):
         x = 760 + i * 190
         L.append({"id": f"{p}up{i}", "start": snap(t0 + 0.1 * i), "duration": snap(dur - 0.1 * i), "timeMode": "layer",
                   "content": {"kind": "shape", "items": vg.VEG[v]()},
-                  "animations": {"position": {"keyframes": [{"time": 0, "value": [x, 1000], "easing": "ease_out"}, {"time": dur - 0.1 * i, "value": [x, 120]}]},
+                  "animations": {"position": {"keyframes": [{"time": 0, "value": [x, 1000], "easing": "ease_out"}, {"time": dur - 0.1 * i, "value": [x, 280]}]},
                                  "scale": {"keyframes": [{"time": 0, "value": [0.6, 0.6]}]},
                                  "rotation": {"keyframes": [{"time": 0, "value": 0}], "expression": "return 15*math.sin(time*6)"}}})
     for i, (x, y) in enumerate([(780, 200), (1680, 220), (1230, 150)]):
